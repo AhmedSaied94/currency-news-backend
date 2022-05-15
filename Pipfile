@@ -16,6 +16,10 @@ django-extensions = "*"
 django-debug-toolbar = "*"
 django-countries = "*"
 django = "*"
+celery = {extras = ["redis"], version = "*"}
+django-celery-beat = "*"
+redis = "*"
+schedule = "*"
 
 [dev-packages]
 autopep8 = "*"

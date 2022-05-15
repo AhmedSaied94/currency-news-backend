@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+from datetime import timedelta
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
@@ -54,6 +55,7 @@ INSTALLED_APPS = [
 
     # custom apps
     'account.apps.AccountConfig',
+    'currency.apps.CurrencyConfig',
 
 
     # 3rd party
@@ -62,6 +64,7 @@ INSTALLED_APPS = [
     'social_django',
     'drf_social_oauth2',
     'django_countries',
+    'django_celery_beat',
 ]
 
 DEV_APPS = [
@@ -239,3 +242,17 @@ SOCIAL_AUTH_USER_FIELDS = ['email', 'username', 'password']
 
 # EMAIL_PORT = 587
 # EMAIL_USE_TLS = True
+
+# CELERY CONFIG
+CELERY_BROKER_URL = "redis://localhost:6379/0"
+CELERY_RESULT_BACKEND = "redis://localhost:6379/1"
+CELERY_TIMEZONE = "UTC"
+
+CELERY_BEAT_SCHEDULE = {
+    'add-every-30-seconds': {
+        'task': 'currency.tasks.add',
+        'schedule': timedelta(seconds=3),
+        'args': (16, 16),
+
+    },
+}

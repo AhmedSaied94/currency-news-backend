@@ -4,6 +4,7 @@ from django.apps import apps
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.utils import timezone
 from django_countries.fields import CountryField
+from currency.models import *
 # Create your models here.
 
 
@@ -43,6 +44,10 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     country = CountryField(null=True, blank=True)
+    home_currency = models.ForeignKey(
+        Currency, related_name='users', on_delete=models.SET_NULL, null=True)
+    base_currency = models.ForeignKey(
+        Currency, related_name='base_users', on_delete=models.SET_NULL, null=True)
 
     objects = UserProfileManager()
 
