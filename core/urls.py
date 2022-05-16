@@ -19,7 +19,8 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/account/', include('account.api.v1.urls'))
+    path('api/account/', include('account.api.v1.urls')),
+    path('api/', include('currency.api.v1.urls')),
 ]
 
 

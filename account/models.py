@@ -48,6 +48,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
         Currency, related_name='users', on_delete=models.SET_NULL, null=True)
     base_currency = models.ForeignKey(
         Currency, related_name='base_users', on_delete=models.SET_NULL, null=True)
+    join_date = models.DateTimeField(default=timezone.now)
 
     objects = UserProfileManager()
 
