@@ -5,7 +5,8 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import smart_str
 from django.utils.http import urlsafe_base64_decode
 from rest_framework.exceptions import AuthenticationFailed
-from currency.api.v1.serializers import CurrencySerializer, CurrencyDetailsSerializer
+from currency.api.v1.serializers import CurrencySerializer
+from django_countries.serializers import CountryFieldMixin
 
 User = get_user_model()
 
@@ -24,7 +25,6 @@ class UserSerializer(serializers.ModelSerializer):
             'join_date',
             'country',
             'home_currency',
-            'base_currency'
         ]
         extra_kwargs = {'password': {'write_only': True}}
 
@@ -35,11 +35,14 @@ class UserSerializer(serializers.ModelSerializer):
             username=self.validated_data.get('username'),
             fullname=self.validated_data.get('fullname'),
             profile_pic=self.validated_data.get('profile_pic'),
-            public_email=self.validated_data.get('public_email'),
             country=self.validated_data.get('country'),
             home_currency=self.validated_data.get('home_currency'),
             base_currency=self.validated_data.get('base_currency')
         )
+        try:
+            validate_password(self.validated_data.get('password'), user)
+        except Exception as e:
+            raise serializers.ValidationError({'password': [e]})
 
         user.set_password(self.validated_data.get('password'))
         user.save()
@@ -102,10 +105,9 @@ class resetPasswordCompleteSerializer(serializers.Serializer):
         return user
 
 
-class UserDataSerializer(serializers.ModelSerializer):
+class UserDataSerializer(CountryFieldMixin, serializers.ModelSerializer):
 
     favorites = serializers.SerializerMethodField()
-    wallet_currencies = serializers.SerializerMethodField()
 
     class Meta:
         model = User
@@ -113,27 +115,17 @@ class UserDataSerializer(serializers.ModelSerializer):
             'id',
             'email',
             'username',
-            'password',
             'fullname',
             'profile_pic',
             'join_date',
             'country',
             'home_currency',
-            'base_currency',
             'favorites',
-            'wallet_currencies',
         ]
 
     def get_favorites(self, obj):
         if hasattr(obj, 'favorites'):
             return CurrencySerializer(
                 instance=obj.favorites.currencies.all(),
-                many=True
-            ).data
-
-    def get_wallet_currencies(self, obj):
-        if hasattr(obj, 'wallet'):
-            return CurrencyDetailsSerializer(
-                instance=obj.wallet.currencies.all(),
                 many=True
             ).data

@@ -2,7 +2,6 @@ import os
 import django
 from celery import Celery
 from django.conf import settings
-from currency.tasks import add
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'core.settings'
 # django.setup()

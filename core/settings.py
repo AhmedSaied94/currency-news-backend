@@ -64,13 +64,15 @@ INSTALLED_APPS = [
     'social_django',
     'drf_social_oauth2',
     'django_countries',
-    'django_celery_beat',
+    # 'django_celery_beat',
 ]
 
 DEV_APPS = [
     'django_extensions',
     'debug_toolbar',
 ]
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -211,8 +213,8 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # Facebook configuration
-SOCIAL_AUTH_FACEBOOK_KEY = '1730643360462848'
-SOCIAL_AUTH_FACEBOOK_SECRET = '43b6ce7faf505b063cc9b0913479ce9d'
+SOCIAL_AUTH_FACEBOOK_KEY = '1186825595425140'
+SOCIAL_AUTH_FACEBOOK_SECRET = '6551dd5569e3f7fdd65d629646d010cb'
 
 # Define SOCIAL_AUTH_FACEBOOK_SCOPE to get extra permissions from Facebook.
 # Email is not sent by default, to get it, you must request the email permission.
@@ -222,8 +224,8 @@ SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
 }
 
 # Google configuration
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '679751054018-2l8lc8ijibfr7ammo77vfu59epohaiu9.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '833753391426-depr9r5jhotuhn2tipfm7v3kp2e4d521.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 # Define SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE to get extra permissions from Google.
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
@@ -237,22 +239,22 @@ SOCIAL_AUTH_USER_FIELDS = ['email', 'username', 'password']
 # Email Configrations
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_HOST_USER = 'sellmysourcecodes22@gmail.com'
-# EMAIL_HOST_PASSWORD = os.environ['NOTIFIER_PASS']
+# EMAIL_HOST_USER = 'srrafa.com@gmail.com'
+# EMAIL_HOST_PASSWORD = '1551244212345'
 
 # EMAIL_PORT = 587
 # EMAIL_USE_TLS = True
 
 # CELERY CONFIG
-CELERY_BROKER_URL = "redis://localhost:6379/0"
-CELERY_RESULT_BACKEND = "redis://localhost:6379/1"
-CELERY_TIMEZONE = "UTC"
+# CELERY_BROKER_URL = "redis://localhost:6379/0"
+# CELERY_RESULT_BACKEND = "redis://localhost:6379/1"
+# CELERY_TIMEZONE = "UTC"
 
-CELERY_BEAT_SCHEDULE = {
-    'add-every-30-seconds': {
-        'task': 'currency.tasks.add',
-        'schedule': timedelta(seconds=3),
-        'args': (16, 16),
+# CELERY_BEAT_SCHEDULE = {
+#     'add-every-30-seconds': {
+#         'task': 'currency.tasks.add',
+#         'schedule': timedelta(seconds=3),
+#         'args': (16, 16),
 
-    },
-}
+#     },
+# }
