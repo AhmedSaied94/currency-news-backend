@@ -1,5 +1,6 @@
 from datetime import date
 from datetime import time
+from pyexpat import model
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
@@ -157,7 +158,14 @@ class Comment(models.Model):
         'News', related_name='comments', on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.user.username} commented on an news for {self.news.first_currency} and {self.news.second_currency}'
+        return f'{self.user.username} commented on an news for {self.news.base_currency} and {self.news.normal_currency}'
+
+
+class Like(models.Model):
+    user = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, related_name='likes')
+    news = models.OneToOneField(
+        'News', related_name='likes', on_delete=models.CASCADE)
 
 
 class UserFavorite(models.Model):

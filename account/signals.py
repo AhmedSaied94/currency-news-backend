@@ -25,7 +25,7 @@ def signupToken(created, instance, *args, **kwargs):
 
             ref_tok = generate_token()
             acc_tok = generate_token()
-            app = Application.objects.get(id=3)
+            app = Application.objects.get(id=4)
             if not instance.is_superuser:
                 refresh_token = RefreshToken.objects.create(
                     user=instance, application=app, revoked=refresh_time(), token=ref_tok)

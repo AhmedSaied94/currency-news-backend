@@ -5,7 +5,7 @@ import time
 from currency.models import Currency, Comparison, ComparisonDetails, DayValues, DayValuesLowHigh, News, NewsAsset, Paragraph
 import requests
 from django.utils import timezone
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, time as Time
 import arabic_reshaper
 from bidi.algorithm import get_display
 import random
@@ -17,6 +17,16 @@ translator = Translator()
 # def add(x, y):
 #     # print(5+9)
 #     return x + y
+
+ar_curs_sympols = ['EGP', 'AED', 'IQD', 'BHD', 'QAR', 'OMR', 'KWD', 'JOD',
+                   'LBP', 'LYD', 'DZD', 'MAD', 'SAR', 'YER', 'TRY', 'SDG', 'TND']
+
+ar_curs = Currency.objects.filter(sympol__in=ar_curs_sympols)
+
+other_curs_sympols = ["CAD", "CHF", "CNY", "EUR", "GBP", "JPY", 'USD', 'MYR',
+                      'PKR', 'RUB', 'MYR', 'MXN', 'ISK', 'IDR', 'DKK', 'CZK', 'BRL', 'ARS']
+
+other_curs = Currency.objects.filter(sympol__in=other_curs_sympols)
 
 
 def new_exchange():
@@ -78,8 +88,16 @@ def new_exchange():
                         normal_currency=normal_currency,
                         close_price=True
                     )
-
-                    if lqs.exists() and lqs.first().bye_value != ComparisonDetails.objects.filter(base_currency=cur, normal_currency=normal_currency, comparison__date__date=datetime.today()).order_by('-comparison__date').bye_value:
+                    excute = False
+                    if normal_currency in ar_curs:
+                        if comparison_details.open_price or comparison_details.close_price:
+                            excute = True
+                    elif normal_currency in other_curs:
+                        if comparison_details.oprn_price or comparison_details.close_price:
+                            excute = True
+                        elif datetime.now().time() > Time(16.15) and datetime.now().time() < Time(17.15):
+                            excute = True
+                    if excute and lqs.exists():
                         last_close = lqs.first().bye_value
 
                         assets = []

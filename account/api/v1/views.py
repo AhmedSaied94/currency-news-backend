@@ -2,6 +2,7 @@ from rest_framework.response import Response
 from oauth2_provider.models import AccessToken, RefreshToken
 from rest_framework import status
 from account.utils import Util
+from currency.models import Currency
 from .serializers import UserSerializer, UpdatePasswordSerializer, UserDataSerializer, resetPasswordCompleteSerializer
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly
@@ -19,7 +20,11 @@ User = get_user_model()
 @permission_classes([])
 def sign_up(request):
     print(request.data)
-    ser_user = UserSerializer(data=request.data)
+    data = request.data
+    data['country'] = data['home_currency'][0:2]
+    data['home_currency'] = Currency.objects.get(
+        sympol=data['home_currency']).id
+    ser_user = UserSerializer(data=data)
     if ser_user.is_valid():
         user = ser_user.save()
         try:
@@ -44,7 +49,7 @@ def sign_up(request):
     return Response(data=ser_user.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['PUT'])
+@api_view(['PATCH'])
 def update_profile(request):
     ser_user = UserSerializer(
         instance=request.user,
@@ -52,8 +57,9 @@ def update_profile(request):
         partial=True
     )
     if ser_user.is_valid():
-        ser_user.update(instance=request.user, validated_data=request.data)
-        return Response(data={'success': 'updated successfully'}, status=status.HTTP_202_ACCEPTED)
+        ser_user.update(instance=request.user,
+                        validated_data=ser_user.validated_data)
+        return Response(data=ser_user.data, status=status.HTTP_202_ACCEPTED)
     return Response(data=ser_user.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -94,12 +100,12 @@ def resetPasswordRequest(request):
         uid64 = urlsafe_base64_encode(smart_bytes(user.id))
         token = PasswordResetTokenGenerator().make_token(user)
         redirect_url = request.data['redirect_url']
-        current_site = 'foxsourcecode.com'
+        current_site = 'localhost:8000'
         relative_site = reverse(
             'password-reset-check',
             kwargs={'uid64': uid64, 'token': token}
         )
-        absurl = f"https://{current_site}{relative_site}"
+        absurl = f"http://{current_site}{relative_site}"
         email_body = f"you requested an email to reset your password \n please use the link below \n {absurl}?redirect_url={redirect_url}"
         data = {
             'email_body': email_body,
@@ -133,6 +139,7 @@ def resetPasswordCheck(request, uid64, token):
 @api_view(['PUT'])
 @permission_classes([])
 def resetPasswordComplete(request):
+    print(request.data)
     serializer = resetPasswordCompleteSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()

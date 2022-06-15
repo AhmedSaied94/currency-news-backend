@@ -7,12 +7,12 @@ from django.utils.http import urlsafe_base64_decode
 from rest_framework.exceptions import AuthenticationFailed
 from currency.api.v1.serializers import CurrencySerializer
 from django_countries.serializers import CountryFieldMixin
+from currency.models import Like
 
 User = get_user_model()
 
 
-class UserSerializer(serializers.ModelSerializer):
-
+class UserSerializer(CountryFieldMixin, serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [
@@ -37,7 +37,6 @@ class UserSerializer(serializers.ModelSerializer):
             profile_pic=self.validated_data.get('profile_pic'),
             country=self.validated_data.get('country'),
             home_currency=self.validated_data.get('home_currency'),
-            base_currency=self.validated_data.get('base_currency')
         )
         try:
             validate_password(self.validated_data.get('password'), user)
@@ -108,6 +107,8 @@ class resetPasswordCompleteSerializer(serializers.Serializer):
 class UserDataSerializer(CountryFieldMixin, serializers.ModelSerializer):
 
     favorites = serializers.SerializerMethodField()
+    home_currency = serializers.SerializerMethodField()
+    likes = serializers.SerializerMethodField()
 
     class Meta:
         model = User
@@ -121,11 +122,21 @@ class UserDataSerializer(CountryFieldMixin, serializers.ModelSerializer):
             'country',
             'home_currency',
             'favorites',
+            'likes'
         ]
 
     def get_favorites(self, obj):
+        lista = []
         if hasattr(obj, 'favorites'):
-            return CurrencySerializer(
-                instance=obj.favorites.currencies.all(),
-                many=True
-            ).data
+            for cur in obj.favorites.currencies.all():
+                lista.append(cur.id)
+        return lista
+
+    def get_home_currency(self, obj):
+        return obj.home_currency.sympol
+
+    def get_likes(self, obj):
+        lista = []
+        for like in obj.likes.all():
+            lista.append(like.news.id)
+        return lista

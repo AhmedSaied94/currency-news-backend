@@ -5,6 +5,20 @@ from rest_framework import serializers
 from currency.models import *
 from datetime import date, datetime, timedelta
 from django_countries.serializers import CountryFieldMixin
+from googletrans import Translator
+from django.contrib.auth import get_user_model
+translator = Translator()
+User = get_user_model()
+
+
+def calc_values(value, carat):
+    return round(value/31.1/24*carat, 2)
+
+
+class UserData(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['profile_pic', 'fullname']
 
 
 class NewRepresent(serializers.StringRelatedField):
@@ -20,24 +34,45 @@ class TypeSerializer(serializers.ModelSerializer):
 
 
 class CommentSerialzer(serializers.ModelSerializer):
+    userdata = serializers.SerializerMethodField()
+    customDate = serializers.SerializerMethodField()
 
     class Meta:
         model = Comment
-        fields = '__all__'
+        fields = ['id', 'content', 'date', 'user',
+                  'news', 'userdata', 'customDate']
+
+    def get_userdata(self, obj):
+        return UserData(instance=obj.user).data
+
+    def get_customDate(self, obj):
+        return obj.date.strftime("%A %-d %B, %Y")
 
 
 class NewsSerializer(serializers.ModelSerializer):
     comments = serializers.SerializerMethodField()
+    date = serializers.DateTimeField("%A %-d %B, %Y")
+    ar_date = serializers.SerializerMethodField()
+    value = serializers.SerializerMethodField()
+    close_value = serializers.SerializerMethodField()
+    cur_name = serializers.SerializerMethodField()
+    likes = serializers.SerializerMethodField()
 
     class Meta:
         model = News
         fields = [
+            'id',
             'header',
             'sub_header',
             'body1',
             'body2',
             'date',
             'comments',
+            'value',
+            'cur_name',
+            'ar_date',
+            'close_value',
+            'likes'
         ]
 
     def get_comments(self, obj):
@@ -45,6 +80,83 @@ class NewsSerializer(serializers.ModelSerializer):
             instance=obj.comments.all(),
             many=True
         ).data
+
+    def get_likes(self, obj):
+        if hasattr(obj, 'likes') and self.context:
+            return obj.likes.user.all().count()
+        else:
+            return 0
+
+    def get_ar_date(self, obj):
+        if self.context:
+            return translator.translate(obj.date.strftime("%A %-d %B, %Y"), src='en', dest='ar').text
+
+    def get_value(self, obj):
+        if not self.context:
+            return None
+        if obj.base_currency.name == 'Gold' or obj.base_currency.name == 'Silver':
+
+            value = ComparisonDetails.objects.get(
+                comparison__date=obj.date,
+                comparison__base_currency=obj.base_currency,
+                normal_currency=obj.normal_currency
+            ).bye_value
+            values = {
+                '12': calc_values(value, 12),
+                '14': calc_values(value, 14),
+                '18': calc_values(value, 18),
+                '21': calc_values(value, 21),
+                '24': calc_values(value, 24),
+                'ingot 5': calc_values(value, 24)*5,
+                'ingot 20': calc_values(value, 24)*20,
+                'ingot 1k': calc_values(value, 24)*1000,
+                'ounce': round(value, 2)
+            }if obj.base_currency.name == 'Gold' else {
+                '999': round(value/31.1, 2),
+                '925': round(value/33.6, 2),
+                '888': round(value/38.85, 2),
+                'ounce': round(value, 2)
+            }
+            return values
+
+    def get_close_value(self, obj):
+        if not self.context:
+            return None
+        if obj.base_currency.name == 'Gold' or obj.base_currency.name == 'Silver':
+
+            value = ComparisonDetails.objects.filter(
+                comparison__date__date=obj.date.date()-timedelta(days=10),
+                comparison__base_currency=obj.base_currency,
+                normal_currency=obj.normal_currency,
+                close_price=True
+            ).first().bye_value
+            values = {
+                '12': calc_values(value, 12),
+                '14': calc_values(value, 14),
+                '18': calc_values(value, 18),
+                '21': calc_values(value, 21),
+                '24': calc_values(value, 24),
+                'ingot 5': calc_values(value, 24)*5,
+                'ingot 20': calc_values(value, 24)*20,
+                'ingot 1k': calc_values(value, 24)*1000,
+                'ounce': round(value, 2)
+            }if obj.base_currency.name == 'Gold' else {
+                '999': round(value/31.1, 2),
+                '925': round(value/33.6, 2),
+                '888': round(value/38.85, 2),
+                'ounce': round(value, 2)
+            }
+            return values
+
+    def get_cur_name(self, obj):
+        if self.context:
+            return {
+                'normal': translator.translate(
+                    obj.normal_currency.name, src='en', dest='ar').text,
+                'base': translator.translate(
+                    obj.base_currency.name, src='en', dest='ar').text,
+                'country': translator.translate(obj.normal_currency.country.name, src='en', dest='ar').text
+            }
 
 
 class ComparisonDetailsSerializer(serializers.ModelSerializer):
@@ -113,16 +225,10 @@ class CurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
     #     ).data
 
     def get_news(self, obj):
-        if obj.currency_type.base_currency:
-            news = NewsSerializer(
-                instance=obj.base_news.all(),
-                many=True
-            ).data
-        else:
-            news = NewsSerializer(
-                instance=obj.normal_news.all(),
-                many=True
-            ).data
+        news = NewsSerializer(
+            instance=obj.normal_news.all().order_by('-date'),
+            many=True
+        ).data
         return news
 
     def get_home_value(self, obj):
@@ -131,96 +237,102 @@ class CurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
             if obj == home:
                 return 1
             else:
-                return str(ComparisonDetails.objects.filter(comparison__base_currency=obj, normal_currency=home).order_by('-comparison__date').first().bye_value) + ' ' + home.sympol
-        base_cur = Currency.objects.get(sympol='USD')
-        return str(1 / ComparisonDetails.objects.filter(comparison__base_currency=base_cur, normal_currency=obj).order_by('-comparison__date').bye_value) + ' ' + base_cur.sympol
-
+                return str(round(ComparisonDetails.objects.filter(comparison__base_currency=obj, normal_currency=home).order_by('-comparison__date').first().bye_value, 3)) + ' ' + home.sympol
+        else:
+            # lista = {}
+            # for cur in Currency.objects.filter(currency_type__name='Base_Currency'):
+            #     value = ComparisonDetails.objects.filter(
+            #         comparison__base_currency=cur, normal_currency=obj).order_by('-comparison__date').first().bye_value
+            #     lista[cur.sympol] = f'{round(1/value, 3)} {cur.sympol}'
+            # return lista
+            value = ComparisonDetails.objects.filter(
+                comparison__base_currency=self.context['base'],
+                normal_currency=obj
+            ).order_by('-comparison__date').first().bye_value
+            return str(round(value, 2)) + f' {obj.sympol}'
         # return obj.get_exchange_value(base)
 
     def get_last7_low_high(self, obj):
         today = datetime.today()
-        base = obj if obj.currency_type.base_currency else Currency.objects.get(
-            sympol='USD')
-        home = self.context['home'] if obj.currency_type.base_currency == True else obj
+        base = obj if obj.currency_type.base_currency else self.context['base']
+        home = obj if not obj.currency_type.base_currency else self.context['home']
         qs = DayValuesLowHigh.objects.filter(
-            day_values__date__range=(today-timedelta(days=7), today),
+            day_values__date__range=(today-timedelta(days=10), today),
             day_values__base_currency=base,
             normal_currency=home
         )
-        if obj.currency_type.base_currency:
-            last7low_high = {
-                'low': str(qs.order_by('low_value').first().low_value) + f" {home.sympol}",
-                'high': str(qs.order_by('-high_value').first().high_value) + f" {home.sympol}"
-            }
-        else:
-            last7low_high = {
-                'low': str(1 / qs.order_by('-high_value').first().high_value) + f' {base.sympol}',
-                'high': str(1 / qs.order_by('low_value').first().low_value) + f' {base.sympol}'
-            }
+        # if obj.currency_type.base_currency:
+        last7low_high = {
+            'low': str(round(qs.order_by('low_value').first().low_value, 3)) + f" {home.sympol}",
+            'high': str(round(qs.order_by('-high_value').first().high_value, 3)) + f" {home.sympol}"
+        }
+        # else:
+        #     last7low_high = {
+        #         'low': str(round(qs.order_by('-high_value').first().high_value, 3)) + f' {base.sympol}',
+        #         'high': str(round(qs.order_by('low_value').first().low_value, 3)) + f' {base.sympol}'
+        #     }
         return last7low_high
 
     def get_day_low_high(self, obj):
-        base = obj if obj.currency_type.base_currency == True else Currency.objects.get(
-            sympol='USD')
-        home = self.context['home'] if obj.currency_type.base_currency == True else obj
+        base = obj if obj.currency_type.base_currency else self.context['base']
+        home = obj if not obj.currency_type.base_currency else self.context['home']
         day_low_high = DayValuesLowHigh.objects.get(
-            day_values__date=datetime.today()-timedelta(days=1),
+            day_values__date=datetime.today()-timedelta(days=10),
             day_values__base_currency=base,
             normal_currency=home
         )
-        if obj.currency_type.base_currency:
-            day_low_high_values = {
-                "low": str(day_low_high.low_value) + f' {home.sympol}',
-                "high": str(day_low_high.high_value) + f' {home.sympol}'
-            }
-        else:
-            day_low_high_values = {
-                "low": str(1 / day_low_high.high_value) + f' {base.sympol}',
-                "high": str(1 / day_low_high.low_value) + f' {base.sympol}'
-            }
+        # if obj.currency_type.base_currency:
+        day_low_high_values = {
+            "low": str(round(day_low_high.low_value, 3)) + f' {home.sympol}',
+            "high": str(round(day_low_high.high_value, 3)) + f' {home.sympol}'
+        }
+        # else:
+        #     day_low_high_values = {
+        #         "low": str(round(1 / day_low_high.high_value, 3)) + f' {base.sympol}',
+        #         "high": str(round(1 / day_low_high.low_value, 3)) + f' {base.sympol}'
+        #     }
         return day_low_high_values
 
     def get_open_price(self, obj):
-        base = obj if obj.currency_type.base_currency == True else Currency.objects.get(
-            sympol='USD')
-        home = self.context['home'] if obj.currency_type.base_currency == True else obj
+        base = obj if obj.currency_type.base_currency else self.context['base']
+        home = obj if not obj.currency_type.base_currency else self.context['home']
         price = ComparisonDetails.objects.filter(
-            comparison__date__date=datetime.today() - timedelta(days=1),
+            comparison__date__date=datetime.today() - timedelta(days=10),
             comparison__base_currency=base,
             normal_currency=home,
             open_price=True
         ).first().bye_value
-        return str(price) + f' {home.sympol}' if obj.currency_type.base_currency else str(1/price) + f' {base.sympol}'
+        return str(round(price, 3)) + f' {home.sympol}'
+        # if obj.currency_type.base_currency else str(round(1/price, 3)) + f' {base.sympol}'
 
     def get_close_price(self, obj):
-        base = obj if obj.currency_type.base_currency == True else Currency.objects.get(
-            sympol='USD')
-        home = self.context['home'] if obj.currency_type.base_currency == True else obj
+        base = obj if obj.currency_type.base_currency else self.context['base']
+        home = obj if not obj.currency_type.base_currency else self.context['home']
         price = ComparisonDetails.objects.filter(
-            comparison__date__date=datetime.today() - timedelta(days=1),
+            comparison__date__date=datetime.today() - timedelta(days=10),
             comparison__base_currency=base,
             normal_currency=home,
             close_price=True
         ).first().bye_value
-        return str(price) + f' {home.sympol}' if obj.currency_type.base_currency else str(1/price) + f' {base.sympol}'
+        return str(round(price, 3)) + f' {home.sympol}'
+        # if obj.currency_type.base_currency else str(round(1/price, 3)) + f' {base.sympol}'
 
     def get_last7graph(self, obj):
         lista = []
-        base = obj if obj.currency_type.base_currency == True else Currency.objects.get(
-            sympol='USD')
-        home = self.context['home'] if obj.currency_type.base_currency == True else obj
+        base = obj if obj.currency_type.base_currency else self.context['base']
+        home = obj if not obj.currency_type.base_currency else self.context['home']
         qs = ComparisonDetails.objects.filter(
             comparison__base_currency=base,
             comparison__date__range=(
-                datetime.today()-timedelta(days=8), datetime.today()-timedelta(days=1)),
+                datetime.today()-timedelta(days=10), datetime.today()-timedelta(days=1)),
             normal_currency=home,
             close_price=True
         ).order_by('comparison__date')
         for ins in qs:
-            if obj.currency_type.base_currency:
-                lista.append(ins.bye_value)
-            else:
-                lista.append(1/ins.bye_value)
+            # if obj.currency_type.base_currency:
+            lista.append(ins.bye_value)
+            # else:
+            #     lista.append(1/ins.bye_value)
         return lista
 
     # def get_comparisons(self, obj):
@@ -297,7 +409,7 @@ class AllCurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
         today = datetime.today()
         home = self.context['home']
         qs = DayValuesLowHigh.objects.filter(
-            day_values__date__range=(today-timedelta(days=7), today),
+            day_values__date__range=(today-timedelta(days=10), today),
             day_values__base_currency=obj,
             normal_currency=home
         )
@@ -310,7 +422,7 @@ class AllCurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
     def get_day_low_high(self, obj):
         home = self.context['home']
         day_low_high = DayValuesLowHigh.objects.get(
-            day_values__date=datetime.today()-timedelta(days=1),
+            day_values__date=datetime.today()-timedelta(days=10),
             day_values__base_currency=obj,
             normal_currency=home
         )
@@ -322,7 +434,7 @@ class AllCurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
     def get_open_price(self, obj):
         home = self.context['home']
         return ComparisonDetails.objects.filter(
-            comparison__date__date=datetime.today() - timedelta(days=1),
+            comparison__date__date=datetime.today() - timedelta(days=10),
             comparison__base_currency=obj,
             normal_currency=home,
             open_price=True
@@ -331,7 +443,7 @@ class AllCurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
     def get_close_price(self, obj):
         home = self.context['home']
         return ComparisonDetails.objects.filter(
-            comparison__date__date=datetime.today() - timedelta(days=1),
+            comparison__date__date=datetime.today() - timedelta(days=10),
             comparison__base_currency=obj,
             normal_currency=home,
             close_price=True
@@ -342,7 +454,7 @@ class AllCurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
         qs = ComparisonDetails.objects.filter(
             comparison__base_currency=obj,
             comparison__date__range=(
-                datetime.today()-timedelta(days=8), datetime.today()-timedelta(days=1)),
+                datetime.today()-timedelta(days=10), datetime.today()-timedelta(1)),
             normal_currency=self.context['home'],
             close_price=True
         ).order_by('comparison__date')
@@ -358,4 +470,5 @@ class CurrencySympolsSerializer(serializers.ModelSerializer):
         fields = [
             'name',
             'sympol',
+            'id'
         ]
