@@ -85,6 +85,7 @@ class Currency(models.Model):
     currency_type = models.ForeignKey(
         'Type', related_name='paper_currency', on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
+    ar_name = models.CharField(max_length=100, null=True, blank=True)
     sympol = models.CharField(max_length=100)
     open_time = models.TimeField(default=time(0, 5))
     close_time = models.TimeField(default=time(6, 0))

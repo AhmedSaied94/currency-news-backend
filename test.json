@@ -1,1401 +1,1541 @@
 [
     {
-        "model": "currency.currency", 
-        "pk": 1, 
+        "model": "currency.currency",
+        "pk": 1,
         "fields": {
-            "currency_type": 1, 
-            "name": "UAE Dirham", 
-            "sympol": "AED", 
+            "currency_type": 1,
+            "name": "UAE Dirham",
+            "ar_name":"درهم اماراتي",
+            "sympol": "AED",
             "country": "AE"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 2, 
+        "model": "currency.currency",
+        "pk": 2,
         "fields": {
-            "currency_type": 2, 
-            "name": "Afghan Afghani", 
-            "sympol": "AFN", 
+            "currency_type": 2,
+            "name": "Afghan Afghani",
+            "ar_name":"افغاني افغاني",
+            "sympol": "AFN",
             "country": "AF"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 3, 
+        "model": "currency.currency",
+        "pk": 3,
         "fields": {
-            "currency_type": 2, 
-            "name": "Albanian Lek", 
-            "sympol": "ALL", 
+            "currency_type": 2,
+            "name": "Albanian Lek",
+            "ar_name":"ليك الباني",
+            "sympol": "ALL",
             "country": "AL"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 4, 
+        "model": "currency.currency",
+        "pk": 4,
         "fields": {
-            "currency_type": 2, 
-            "name": "Armenian Dram", 
-            "sympol": "AMD", 
+            "currency_type": 2,
+            "name": "Armenian Dram",
+            "ar_name":"درام ارميني",
+            "sympol": "AMD",
             "country": "AM"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 6, 
+        "model": "currency.currency",
+        "pk": 6,
         "fields": {
-            "currency_type": 2, 
-            "name": "Angolan Kwanza", 
-            "sympol": "AOA", 
+            "currency_type": 2,
+            "name": "Angolan Kwanza",
+            "ar_name":"كوانزا انغولي",
+            "sympol": "AOA",
             "country": "AO"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 7, 
+        "model": "currency.currency",
+        "pk": 7,
         "fields": {
-            "currency_type": 2, 
-            "name": "Argentine Peso", 
-            "sympol": "ARS", 
+            "currency_type": 2,
+            "name": "Argentine Peso",
+            "ar_name":"بيزو ارجنتيني",
+            "sympol": "ARS",
             "country": "AR"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 8, 
+        "model": "currency.currency",
+        "pk": 8,
         "fields": {
-            "currency_type": 2, 
-            "name": "Australian Dollar", 
-            "sympol": "AUD", 
+            "currency_type": 2,
+            "name": "Australian Dollar",
+            "ar_name":"دولار استرالي",
+            "sympol": "AUD",
             "country": "AU"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 10, 
+        "model": "currency.currency",
+        "pk": 10,
         "fields": {
-            "currency_type": 2, 
-            "name": "Bosnia And Herzegovina Convertible Mark", 
-            "sympol": "BAM", 
+            "currency_type": 2,
+            "name": "Bosnia And Herzegovina Convertible Mark",
+            "ar_name":"مارك البوسنة والهرسك",
+            "sympol": "BAM",
             "country": "BA"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 12, 
+        "model": "currency.currency",
+        "pk": 12,
         "fields": {
-            "currency_type": 2, 
-            "name": "Bangladeshi Taka", 
-            "sympol": "BDT", 
+            "currency_type": 2,
+            "name": "Bangladeshi Taka",
+            "ar_name":"تاكا بنجلادشي",
+            "sympol": "BDT",
             "country": "BD"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 13, 
+        "model": "currency.currency",
+        "pk": 13,
         "fields": {
-            "currency_type": 2, 
-            "name": "Bulgarian Lev", 
-            "sympol": "BGN", 
+            "currency_type": 2,
+            "name": "Bulgarian Lev",
+            "ar_name":"ليف بلغاري",
+            "sympol": "BGN",
             "country": "BG"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 14, 
+        "model": "currency.currency",
+        "pk": 14,
         "fields": {
-            "currency_type": 2, 
-            "name": "Bahraini Dinar", 
-            "sympol": "BHD", 
+            "currency_type": 2,
+            "name": "Bahraini Dinar",
+            "ar_name":"دينار بحريني",
+            "sympol": "BHD",
             "country": "BH"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 15, 
+        "model": "currency.currency",
+        "pk": 15,
         "fields": {
-            "currency_type": 2, 
-            "name": "Burundi Franc", 
-            "sympol": "BIF", 
+            "currency_type": 2,
+            "name": "Burundi Franc",
+            "ar_name":"فرنك بوروندي",
+            "sympol": "BIF",
             "country": "BI"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 17, 
+        "model": "currency.currency",
+        "pk": 17,
         "fields": {
-            "currency_type": 2, 
-            "name": "Brunei Dollar", 
-            "sympol": "BND", 
+            "currency_type": 2,
+            "name": "Brunei Dollar",
+            "ar_name":"دولار بروناي",
+            "sympol": "BND",
             "country": "BN"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 18, 
+        "model": "currency.currency",
+        "pk": 18,
         "fields": {
-            "currency_type": 2, 
-            "name": "Bolivian Boliviano", 
-            "sympol": "BOB", 
+            "currency_type": 2,
+            "name": "Bolivian Boliviano",
+            "ar_name":"بوليفانو بوليفي",
+            "sympol": "BOB",
             "country": "BO"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 19, 
+        "model": "currency.currency",
+        "pk": 19,
         "fields": {
-            "currency_type": 2, 
-            "name": "Brazilian Real", 
-            "sympol": "BRL", 
+            "currency_type": 2,
+            "name": "Brazilian Real",
+            "ar_name":"ريال برازيلي",
+            "sympol": "BRL",
             "country": "BR"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 20, 
+        "model": "currency.currency",
+        "pk": 20,
         "fields": {
-            "currency_type": 2, 
-            "name": "Bahamian Dollar", 
-            "sympol": "BSD", 
+            "currency_type": 2,
+            "name": "Bahamian Dollar",
+            "ar_name":"دولار باهامي",
+            "sympol": "BSD",
             "country": "BS"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 22, 
+        "model": "currency.currency",
+        "pk": 22,
         "fields": {
-            "currency_type": 2, 
-            "name": "Bhutanese Ngultrum", 
-            "sympol": "BTN", 
+            "currency_type": 2,
+            "name": "Bhutanese Ngultrum",
+            "ar_name":"نولترم بوتاني",
+            "sympol": "BTN",
             "country": "BT"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 23, 
+        "model": "currency.currency",
+        "pk": 23,
         "fields": {
-            "currency_type": 2, 
-            "name": "Belarusian Ruble", 
-            "sympol": "BYN", 
+            "currency_type": 2,
+            "name": "Belarusian Ruble",
+            "ar_name":"روبل بلاروسي",
+            "sympol": "BYN",
             "country": "BY"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 24, 
+        "model": "currency.currency",
+        "pk": 24,
         "fields": {
-            "currency_type": 2, 
-            "name": "Belize Dollar", 
-            "sympol": "BZD", 
+            "currency_type": 2,
+            "name": "Belize Dollar",
+            "ar_name":"دولار بليز",
+            "sympol": "BZD",
             "country": "BZ"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 25, 
+        "model": "currency.currency",
+        "pk": 25,
         "fields": {
-            "currency_type": 1, 
-            "name": "Canadian Dollar", 
-            "sympol": "CAD", 
+            "currency_type": 1,
+            "name": "Canadian Dollar",
+            "ar_name":"دولار كندي",
+            "sympol": "CAD",
             "country": "CA"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 26, 
+        "model": "currency.currency",
+        "pk": 26,
         "fields": {
-            "currency_type": 2, 
-            "name": "Congolese Franc", 
-            "sympol": "CDF", 
+            "currency_type": 2,
+            "name": "Congolese Franc",
+            "ar_name":"فرنك كونغولي",
+            "sympol": "CDF",
             "country": "CD"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 27, 
+        "model": "currency.currency",
+        "pk": 27,
         "fields": {
-            "currency_type": 1, 
-            "name": "Swiss Franc", 
-            "sympol": "CHF", 
+            "currency_type": 1,
+            "name": "Swiss Franc",
+            "ar_name":"فرنك سويسري",
+            "sympol": "CHF",
             "country": "CH"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 28, 
+        "model": "currency.currency",
+        "pk": 28,
         "fields": {
-            "currency_type": 2, 
-            "name": "Chilean Unit Of Account", 
-            "sympol": "CLF", 
+            "currency_type": 2,
+            "name": "Chilean Unit Of Account",
+            "ar_name":"حساب تشيلي",
+            "sympol": "CLF",
             "country": "CL"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 29, 
+        "model": "currency.currency",
+        "pk": 29,
         "fields": {
-            "currency_type": 2, 
-            "name": "Chilean Peso", 
-            "sympol": "CLP", 
+            "currency_type": 2,
+            "name": "Chilean Peso",
+            "ar_name":"بيزو تشيلي",
+            "sympol": "CLP",
             "country": "CL"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 30, 
+        "model": "currency.currency",
+        "pk": 30,
         "fields": {
-            "currency_type": 1, 
-            "name": "Chinese Yuan Renminbi", 
-            "sympol": "CNY", 
+            "currency_type": 1,
+            "name": "Chinese Yuan Renminbi",
+            "ar_name":"ليوان صيني",
+            "sympol": "CNY",
             "country": "CN"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 31, 
+        "model": "currency.currency",
+        "pk": 31,
         "fields": {
-            "currency_type": 2, 
-            "name": "Colombian Peso", 
-            "sympol": "COP", 
+            "currency_type": 2,
+            "name": "Colombian Peso",
+            "ar_name":"بيزو كولومبي",
+            "sympol": "COP",
             "country": "CO"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 32, 
+        "model": "currency.currency",
+        "pk": 32,
         "fields": {
-            "currency_type": 2, 
-            "name": "Costa Rican Colon", 
-            "sympol": "CRC", 
+            "currency_type": 2,
+            "name": "Costa Rican Colon",
+            "ar_name":"كولون كوستاريكي",
+            "sympol": "CRC",
             "country": "CR"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 33, 
+        "model": "currency.currency",
+        "pk": 33,
         "fields": {
-            "currency_type": 2, 
-            "name": "Cape Verdean Escudo", 
-            "sympol": "CVE", 
+            "currency_type": 2,
+            "name": "Cape Verdean Escudo",
+            "ar_name":"اسكودو الرأس الاخضر",
+            "sympol": "CVE",
             "country": "CV"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 34, 
+        "model": "currency.currency",
+        "pk": 34,
         "fields": {
-            "currency_type": 2, 
-            "name": "Czech Koruna", 
-            "sympol": "CZK", 
+            "currency_type": 2,
+            "name": "Czech Koruna",
+            "ar_name":"كورونا تشيكي",
+            "sympol": "CZK",
             "country": "CZ"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 35, 
+        "model": "currency.currency",
+        "pk": 35,
         "fields": {
-            "currency_type": 2, 
-            "name": "Djiboutian Franc", 
-            "sympol": "DJF", 
+            "currency_type": 2,
+            "name": "Djiboutian Franc",
+            "ar_name":"فرنك جيبوتي",
+            "sympol": "DJF",
             "country": "DJ"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 36, 
+        "model": "currency.currency",
+        "pk": 36,
         "fields": {
-            "currency_type": 2, 
-            "name": "Danish Krone", 
-            "sympol": "DKK", 
+            "currency_type": 2,
+            "name": "Danish Krone",
+            "ar_name":"كرونة دنماركي",
+            "sympol": "DKK",
             "country": "DK"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 37, 
+        "model": "currency.currency",
+        "pk": 37,
         "fields": {
-            "currency_type": 2, 
-            "name": "Dominican Peso", 
-            "sympol": "DOP", 
+            "currency_type": 2,
+            "name": "Dominican Peso",
+            "ar_name":"بيزو دومنيكاني",
+            "sympol": "DOP",
             "country": "DO"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 38, 
+        "model": "currency.currency",
+        "pk": 38,
         "fields": {
-            "currency_type": 2, 
-            "name": "Algerian Dinar", 
-            "sympol": "DZD", 
+            "currency_type": 2,
+            "name": "Algerian Dinar",
+            "ar_name":"دينار جزائري",
+            "sympol": "DZD",
             "country": "DZ"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 39, 
+        "model": "currency.currency",
+        "pk": 39,
         "fields": {
-            "currency_type": 2, 
-            "name": "Egyptian Pound", 
-            "sympol": "EGP", 
+            "currency_type": 2,
+            "name": "Egyptian Pound",
+            "ar_name":"جنيه مصري",
+            "sympol": "EGP",
             "country": "EG"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 40, 
+        "model": "currency.currency",
+        "pk": 40,
         "fields": {
-            "currency_type": 2, 
-            "name": "Eritrean Nakfa", 
-            "sympol": "ERN", 
+            "currency_type": 2,
+            "name": "Eritrean Nakfa",
+            "ar_name":"نافكا اريتري",
+            "sympol": "ERN",
             "country": "ER"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 41, 
+        "model": "currency.currency",
+        "pk": 41,
         "fields": {
-            "currency_type": 2, 
-            "name": "Ethiopian Birr", 
-            "sympol": "ETB", 
+            "currency_type": 2,
+            "name": "Ethiopian Birr",
+            "ar_name":"بر اثيوبي",
+            "sympol": "ETB",
             "country": "ET"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 43, 
+        "model": "currency.currency",
+        "pk": 43,
         "fields": {
-            "currency_type": 1, 
-            "name": "European Euro", 
-            "sympol": "EUR", 
+            "currency_type": 1,
+            "name": "European Euro",
+            "ar_name":"يورو اوروبي",
+            "sympol": "EUR",
             "country": "EU"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 44, 
+        "model": "currency.currency",
+        "pk": 44,
         "fields": {
-            "currency_type": 2, 
-            "name": "Fijian Dollar", 
-            "sympol": "FJD", 
+            "currency_type": 2,
+            "name": "Fijian Dollar",
+            "ar_name":"دولار فيجي",
+            "sympol": "FJD",
             "country": "FJ"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 45, 
+        "model": "currency.currency",
+        "pk": 45,
         "fields": {
-            "currency_type": 2, 
-            "name": "Falkland Islands Pound", 
-            "sympol": "FKP", 
+            "currency_type": 2,
+            "name": "Falkland Islands Pound",
+            "ar_name":"جنيه جزر فوكلاند",
+            "sympol": "FKP",
             "country": "FK"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 46, 
+        "model": "currency.currency",
+        "pk": 46,
         "fields": {
-            "currency_type": 1, 
-            "name": "Pound Sterling", 
-            "sympol": "GBP", 
+            "currency_type": 1,
+            "name": "Pound Sterling",
+            "ar_name":"جنيه استرليني",
+            "sympol": "GBP",
             "country": "GB"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 47, 
+        "model": "currency.currency",
+        "pk": 47,
         "fields": {
-            "currency_type": 2, 
-            "name": "Georgian Lari", 
-            "sympol": "GEL", 
+            "currency_type": 2,
+            "name": "Georgian Lari",
+            "ar_name":"لاري جورجي",
+            "sympol": "GEL",
             "country": "GE"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 48, 
+        "model": "currency.currency",
+        "pk": 48,
         "fields": {
-            "currency_type": 2, 
-            "name": "Ghanaian Cedi", 
-            "sympol": "GHS", 
+            "currency_type": 2,
+            "name": "Ghanaian Cedi",
+            "ar_name":"سيدي غاني",
+            "sympol": "GHS",
             "country": "GH"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 49, 
+        "model": "currency.currency",
+        "pk": 49,
         "fields": {
-            "currency_type": 2, 
-            "name": "Gibraltar Pound", 
-            "sympol": "GIP", 
+            "currency_type": 2,
+            "name": "Gibraltar Pound",
+            "ar_name":"جنيه جبل طارق",
+            "sympol": "GIP",
             "country": "GI"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 50, 
+        "model": "currency.currency",
+        "pk": 50,
         "fields": {
-            "currency_type": 2, 
-            "name": "Gambian Dalasi", 
-            "sympol": "GMD", 
+            "currency_type": 2,
+            "name": "Gambian Dalasi",
+            "ar_name":"دالاسي جامبي",
+            "sympol": "GMD",
             "country": "GM"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 51, 
+        "model": "currency.currency",
+        "pk": 51,
         "fields": {
-            "currency_type": 2, 
-            "name": "Guinean Franc", 
-            "sympol": "GNF", 
+            "currency_type": 2,
+            "name": "Guinean Franc",
+            "ar_name":"فرنك غيني",
+            "sympol": "GNF",
             "country": "GN"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 52, 
+        "model": "currency.currency",
+        "pk": 52,
         "fields": {
-            "currency_type": 2, 
-            "name": "Guatemalan Quetzal", 
-            "sympol": "GTQ", 
+            "currency_type": 2,
+            "name": "Guatemalan Quetzal",
+            "ar_name":"كواتزال جواتيمالي",
+            "sympol": "GTQ",
             "country": "GT"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 53, 
+        "model": "currency.currency",
+        "pk": 53,
         "fields": {
-            "currency_type": 2, 
-            "name": "Guyanese Dollar", 
-            "sympol": "GYD", 
+            "currency_type": 2,
+            "name": "Guyanese Dollar",
+            "ar_name":"دولار جوياني",
+            "sympol": "GYD",
             "country": "GY"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 54, 
+        "model": "currency.currency",
+        "pk": 54,
         "fields": {
-            "currency_type": 2, 
-            "name": "Hong Kong Dollar", 
-            "sympol": "HKD", 
+            "currency_type": 2,
+            "name": "Hong Kong Dollar",
+            "ar_name":"دولار هونج كونج",
+            "sympol": "HKD",
             "country": "HK"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 55, 
+        "model": "currency.currency",
+        "pk": 55,
         "fields": {
-            "currency_type": 2, 
-            "name": "Honduran Lempira", 
-            "sympol": "HNL", 
+            "currency_type": 2,
+            "name": "Honduran Lempira",
+            "ar_name":"لمبيرا هندوراسي",
+            "sympol": "HNL",
             "country": "HN"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 56, 
+        "model": "currency.currency",
+        "pk": 56,
         "fields": {
-            "currency_type": 2, 
-            "name": "Croatian Kuna", 
-            "sympol": "HRK", 
+            "currency_type": 2,
+            "name": "Croatian Kuna",
+            "ar_name":"كونا كرواتي",
+            "sympol": "HRK",
             "country": "HR"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 57, 
+        "model": "currency.currency",
+        "pk": 57,
         "fields": {
-            "currency_type": 2, 
-            "name": "Haitian Gourde", 
-            "sympol": "HTG", 
+            "currency_type": 2,
+            "name": "Haitian Gourde",
+            "ar_name":"جورد هايتي",
+            "sympol": "HTG",
             "country": "HT"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 58, 
+        "model": "currency.currency",
+        "pk": 58,
         "fields": {
-            "currency_type": 2, 
-            "name": "Hungarian Forint", 
-            "sympol": "HUF", 
+            "currency_type": 2,
+            "name": "Hungarian Forint",
+            "ar_name":"فورنت مجري",
+            "sympol": "HUF",
             "country": "HU"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 59, 
+        "model": "currency.currency",
+        "pk": 59,
         "fields": {
-            "currency_type": 2, 
-            "name": "Indonesian Rupiah", 
-            "sympol": "IDR", 
+            "currency_type": 2,
+            "name": "Indonesian Rupiah",
+            "ar_name":"روبية اندونيسية",
+            "sympol": "IDR",
             "country": "ID"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 60, 
+        "model": "currency.currency",
+        "pk": 60,
         "fields": {
-            "currency_type": 2, 
-            "name": "Israeli New Shekel", 
-            "sympol": "ILS", 
+            "currency_type": 2,
+            "name": "Israeli New Shekel",
+            "ar_name":"شيكل اسرائيلي",
+            "sympol": "ILS",
             "country": "IL"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 61, 
+        "model": "currency.currency",
+        "pk": 61,
         "fields": {
-            "currency_type": 2, 
-            "name": "Indian Rupee", 
-            "sympol": "INR", 
+            "currency_type": 2,
+            "name": "Indian Rupee",
+            "ar_name":"روبية هندية",
+            "sympol": "INR",
             "country": "IN"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 62, 
+        "model": "currency.currency",
+        "pk": 62,
         "fields": {
-            "currency_type": 2, 
-            "name": "Iraqi Dinar", 
-            "sympol": "IQD", 
+            "currency_type": 2,
+            "name": "Iraqi Dinar",
+            "ar_name":"دينار عراقي",
+            "sympol": "IQD",
             "country": "IQ"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 63, 
+        "model": "currency.currency",
+        "pk": 63,
         "fields": {
-            "currency_type": 2, 
-            "name": "Iranian Rial", 
-            "sympol": "IRR", 
+            "currency_type": 2,
+            "name": "Iranian Rial",
+            "ar_name":"ريال ايراني",
+            "sympol": "IRR",
             "country": "IR"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 64, 
+        "model": "currency.currency",
+        "pk": 64,
         "fields": {
-            "currency_type": 2, 
-            "name": "Icelandic Krona", 
-            "sympol": "ISK", 
+            "currency_type": 2,
+            "name": "Icelandic Krona",
+            "ar_name":"كرونة ايسلاندي",
+            "sympol": "ISK",
             "country": "IS"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 65, 
+        "model": "currency.currency",
+        "pk": 65,
         "fields": {
-            "currency_type": 2, 
-            "name": "Jamaican Dollar", 
-            "sympol": "JMD", 
+            "currency_type": 2,
+            "name": "Jamaican Dollar",
+            "ar_name":"دولار جمايكي",
+            "sympol": "JMD",
             "country": "JM"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 66, 
+        "model": "currency.currency",
+        "pk": 66,
         "fields": {
-            "currency_type": 2, 
-            "name": "Jordanian Dinar", 
-            "sympol": "JOD", 
+            "currency_type": 2,
+            "name": "Jordanian Dinar",
+            "ar_name":"دينار اردني",
+            "sympol": "JOD",
             "country": "JO"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 67, 
+        "model": "currency.currency",
+        "pk": 67,
         "fields": {
-            "currency_type": 1, 
-            "name": "Japanese Yen", 
-            "sympol": "JPY", 
+            "currency_type": 1,
+            "name": "Japanese Yen",
+            "ar_name":"ين ياباني",
+            "sympol": "JPY",
             "country": "JP"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 68, 
+        "model": "currency.currency",
+        "pk": 68,
         "fields": {
-            "currency_type": 2, 
-            "name": "Kenyan Shilling", 
-            "sympol": "KES", 
+            "currency_type": 2,
+            "name": "Kenyan Shilling",
+            "ar_name":"شلن كيني",
+            "sympol": "KES",
             "country": "KE"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 69, 
+        "model": "currency.currency",
+        "pk": 69,
         "fields": {
-            "currency_type": 2, 
-            "name": "Kyrgyzstani Som", 
-            "sympol": "KGS", 
+            "currency_type": 2,
+            "name": "Kyrgyzstani Som",
+            "ar_name":"سوم قرغيزستاني",
+            "sympol": "KGS",
             "country": "KG"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 70, 
+        "model": "currency.currency",
+        "pk": 70,
         "fields": {
-            "currency_type": 2, 
-            "name": "Cambodian Riel", 
-            "sympol": "KHR", 
+            "currency_type": 2,
+            "name": "Cambodian Riel",
+            "ar_name":"ريال كمبودي",
+            "sympol": "KHR",
             "country": "KH"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 71, 
+        "model": "currency.currency",
+        "pk": 71,
         "fields": {
-            "currency_type": 2, 
-            "name": "Comorian Franc", 
-            "sympol": "KMF", 
+            "currency_type": 2,
+            "name": "Comorian Franc",
+            "ar_name":"فرنك جزر القمر",
+            "sympol": "KMF",
             "country": "KM"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 72, 
+        "model": "currency.currency",
+        "pk": 72,
         "fields": {
-            "currency_type": 2, 
-            "name": "South Korean Won", 
-            "sympol": "KRW", 
+            "currency_type": 2,
+            "name": "South Korean Won",
+            "ar_name":"وون كوري جنوبي",
+            "sympol": "KRW",
             "country": "KR"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 73, 
+        "model": "currency.currency",
+        "pk": 73,
         "fields": {
-            "currency_type": 1, 
-            "name": "Kuwaiti Dinar", 
-            "sympol": "KWD", 
+            "currency_type": 1,
+            "name": "Kuwaiti Dinar",
+            "ar_name":"دينار كويتي",
+            "sympol": "KWD",
             "country": "KW"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 75, 
+        "model": "currency.currency",
+        "pk": 75,
         "fields": {
-            "currency_type": 2, 
-            "name": "Kazakhstani Tenge", 
-            "sympol": "KZT", 
+            "currency_type": 2,
+            "name": "Kazakhstani Tenge",
+            "ar_name":"تنج كزاخستاني",
+            "sympol": "KZT",
             "country": "KZ"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 76, 
+        "model": "currency.currency",
+        "pk": 76,
         "fields": {
-            "currency_type": 2, 
-            "name": "Lao Kip", 
-            "sympol": "LAK", 
+            "currency_type": 2,
+            "name": "Lao Kip",
+            "ar_name":"كيب لاوي",
+            "sympol": "LAK",
             "country": "LA"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 77, 
+        "model": "currency.currency",
+        "pk": 77,
         "fields": {
-            "currency_type": 2, 
-            "name": "Lebanese Pound", 
-            "sympol": "LBP", 
+            "currency_type": 2,
+            "name": "Lebanese Pound",
+            "ar_name":"ليرة لبنانية",
+            "sympol": "LBP",
             "country": "LB"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 78, 
+        "model": "currency.currency",
+        "pk": 78,
         "fields": {
-            "currency_type": 2, 
-            "name": "Sri Lankan Rupee", 
-            "sympol": "LKR", 
+            "currency_type": 2,
+            "name": "Sri Lankan Rupee",
+            "ar_name":"روبية سريلانكية",
+            "sympol": "LKR",
             "country": "LK"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 79, 
+        "model": "currency.currency",
+        "pk": 79,
         "fields": {
-            "currency_type": 2, 
-            "name": "Liberian Dollar", 
-            "sympol": "LRD", 
+            "currency_type": 2,
+            "name": "Liberian Dollar",
+            "ar_name":"دولار ليبيري",
+            "sympol": "LRD",
             "country": "LR"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 80, 
+        "model": "currency.currency",
+        "pk": 80,
         "fields": {
-            "currency_type": 2, 
-            "name": "Lesotho Loti", 
-            "sympol": "LSL", 
+            "currency_type": 2,
+            "name": "Lesotho Loti",
+            "ar_name":"لوتي ليسوتي",
+            "sympol": "LSL",
             "country": "LS"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 81, 
+        "model": "currency.currency",
+        "pk": 81,
         "fields": {
-            "currency_type": 2, 
-            "name": "Libyan Dinar", 
-            "sympol": "LYD", 
+            "currency_type": 2,
+            "name": "Libyan Dinar",
+            "ar_name":"دينار ليبي",
+            "sympol": "LYD",
             "country": "LY"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 82, 
+        "model": "currency.currency",
+        "pk": 82,
         "fields": {
-            "currency_type": 2, 
-            "name": "Moroccan Dirham", 
-            "sympol": "MAD", 
+            "currency_type": 2,
+            "name": "Moroccan Dirham",
+            "ar_name":"درهم مغربي",
+            "sympol": "MAD",
             "country": "MA"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 83, 
+        "model": "currency.currency",
+        "pk": 83,
         "fields": {
-            "currency_type": 2, 
-            "name": "Moldovan Leu", 
-            "sympol": "MDL", 
+            "currency_type": 2,
+            "name": "Moldovan Leu",
+            "ar_name":"ليو مولدوفي",
+            "sympol": "MDL",
             "country": "MD"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 84, 
+        "model": "currency.currency",
+        "pk": 84,
         "fields": {
-            "currency_type": 2, 
-            "name": "Malagasy Ariary", 
-            "sympol": "MGA", 
+            "currency_type": 2,
+            "name": "Malagasy Ariary",
+            "ar_name":"ارياري مدغشقري",
+            "sympol": "MGA",
             "country": "MG"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 85, 
+        "model": "currency.currency",
+        "pk": 85,
         "fields": {
-            "currency_type": 2, 
-            "name": "Macedonian Denar", 
-            "sympol": "MKD", 
+            "currency_type": 2,
+            "name": "Macedonian Denar",
+            "ar_name":"دينار مقدوني",
+            "sympol": "MKD",
             "country": "MK"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 87, 
+        "model": "currency.currency",
+        "pk": 87,
         "fields": {
-            "currency_type": 2, 
-            "name": "Mongolian Tugrik", 
-            "sympol": "MNT", 
+            "currency_type": 2,
+            "name": "Mongolian Tugrik",
+            "ar_name":"توغريك منغولي",
+            "sympol": "MNT",
             "country": "MN"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 88, 
+        "model": "currency.currency",
+        "pk": 88,
         "fields": {
-            "currency_type": 2, 
-            "name": "Macanese Pataca", 
-            "sympol": "MOP", 
+            "currency_type": 2,
+            "name": "Macanese Pataca",
+            "ar_name":"باتاكا ماكاوي",
+            "sympol": "MOP",
             "country": "MO"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 90, 
+        "model": "currency.currency",
+        "pk": 90,
         "fields": {
-            "currency_type": 2, 
-            "name": "Mauritian Rupee", 
-            "sympol": "MUR", 
+            "currency_type": 2,
+            "name": "Mauritian Rupee",
+            "ar_name":"روبية موريتانية",
+            "sympol": "MUR",
             "country": "MU"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 91, 
+        "model": "currency.currency",
+        "pk": 91,
         "fields": {
-            "currency_type": 2, 
-            "name": "Maldivian Rufiyaa", 
-            "sympol": "MVR", 
+            "currency_type": 2,
+            "name": "Maldivian Rufiyaa",
+            "ar_name":"روفيا مالديفية",
+            "sympol": "MVR",
             "country": "MV"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 92, 
+        "model": "currency.currency",
+        "pk": 92,
         "fields": {
-            "currency_type": 2, 
-            "name": "Malawian Kwacha", 
-            "sympol": "MWK", 
+            "currency_type": 2,
+            "name": "Malawian Kwacha",
+            "ar_name":"كواشا ملاوية",
+            "sympol": "MWK",
             "country": "MW"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 93, 
+        "model": "currency.currency",
+        "pk": 93,
         "fields": {
-            "currency_type": 2, 
-            "name": "Mexican Peso", 
-            "sympol": "MXN", 
+            "currency_type": 2,
+            "name": "Mexican Peso",
+            "ar_name":"بيزو مكسيكي",
+            "sympol": "MXN",
             "country": "MX"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 94, 
+        "model": "currency.currency",
+        "pk": 94,
         "fields": {
-            "currency_type": 2, 
-            "name": "Malaysian Ringgit", 
-            "sympol": "MYR", 
+            "currency_type": 2,
+            "name": "Malaysian Ringgit",
+            "ar_name":"رينغيت ماليزي",
+            "sympol": "MYR",
             "country": "MY"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 95, 
+        "model": "currency.currency",
+        "pk": 95,
         "fields": {
-            "currency_type": 2, 
-            "name": "Mozambican Metical", 
-            "sympol": "MZN", 
+            "currency_type": 2,
+            "name": "Mozambican Metical",
+            "ar_name":"متكال موزمبيقي",
+            "sympol": "MZN",
             "country": "MZ"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 96, 
+        "model": "currency.currency",
+        "pk": 96,
         "fields": {
-            "currency_type": 2, 
-            "name": "Namibian Dollar", 
-            "sympol": "NAD", 
+            "currency_type": 2,
+            "name": "Namibian Dollar",
+            "ar_name":"دولار ناميبي",
+            "sympol": "NAD",
             "country": "NA"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 97, 
+        "model": "currency.currency",
+        "pk": 97,
         "fields": {
-            "currency_type": 2, 
-            "name": "Nigerian Naira", 
-            "sympol": "NGN", 
+            "currency_type": 2,
+            "name": "Nigerian Naira",
+            "ar_name":"نيرة نيجيرية",
+            "sympol": "NGN",
             "country": "NG"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 98, 
+        "model": "currency.currency",
+        "pk": 98,
         "fields": {
-            "currency_type": 2, 
-            "name": "Nicaraguan Cordoba", 
-            "sympol": "NIO", 
+            "currency_type": 2,
+            "name": "Nicaraguan Cordoba",
+            "ar_name":"كوردوبا نيكارغوية",
+            "sympol": "NIO",
             "country": "NI"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 99, 
+        "model": "currency.currency",
+        "pk": 99,
         "fields": {
-            "currency_type": 2, 
-            "name": "Norwegian Krone", 
-            "sympol": "NOK", 
+            "currency_type": 2,
+            "name": "Norwegian Krone",
+            "ar_name":"كرونة نرويجية",
+            "sympol": "NOK",
             "country": "NO"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 100, 
+        "model": "currency.currency",
+        "pk": 100,
         "fields": {
-            "currency_type": 2, 
-            "name": "Nepalese Rupee", 
-            "sympol": "NPR", 
+            "currency_type": 2,
+            "name": "Nepalese Rupee",
+            "ar_name":"روبية نيبالية",
+            "sympol": "NPR",
             "country": "NP"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 101, 
+        "model": "currency.currency",
+        "pk": 101,
         "fields": {
-            "currency_type": 2, 
-            "name": "New Zealand Dollar", 
-            "sympol": "NZD", 
+            "currency_type": 2,
+            "name": "New Zealand Dollar",
+            "ar_name":"دولار نيوزلاندي",
+            "sympol": "NZD",
             "country": "NZ"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 102, 
+        "model": "currency.currency",
+        "pk": 102,
         "fields": {
-            "currency_type": 1, 
-            "name": "Omani Rial", 
-            "sympol": "OMR", 
+            "currency_type": 1,
+            "name": "Omani Rial",
+            "ar_name":"ريال عماني",
+            "sympol": "OMR",
             "country": "OM"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 103, 
+        "model": "currency.currency",
+        "pk": 103,
         "fields": {
-            "currency_type": 2, 
-            "name": "Panamanian Balboa", 
-            "sympol": "PAB", 
+            "currency_type": 2,
+            "name": "Panamanian Balboa",
+            "ar_name":"بالبوا بنمي",
+            "sympol": "PAB",
             "country": "PA"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 104, 
+        "model": "currency.currency",
+        "pk": 104,
         "fields": {
-            "currency_type": 2, 
-            "name": "Peruvian Sol", 
-            "sympol": "PEN", 
+            "currency_type": 2,
+            "name": "Peruvian Sol",
+            "ar_name":"سول بيروفي",
+            "sympol": "PEN",
             "country": "PE"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 105, 
+        "model": "currency.currency",
+        "pk": 105,
         "fields": {
-            "currency_type": 2, 
-            "name": "Philippine Peso", 
-            "sympol": "PHP", 
+            "currency_type": 2,
+            "name": "Philippine Peso",
+            "ar_name":"بيزو فيلبيني",
+            "sympol": "PHP",
             "country": "PH"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 106, 
+        "model": "currency.currency",
+        "pk": 106,
         "fields": {
-            "currency_type": 2, 
-            "name": "Pakistani Rupee", 
-            "sympol": "PKR", 
+            "currency_type": 2,
+            "name": "Pakistani Rupee",
+            "ar_name":"روبية باكستانية",
+            "sympol": "PKR",
             "country": "PK"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 107, 
+        "model": "currency.currency",
+        "pk": 107,
         "fields": {
-            "currency_type": 2, 
-            "name": "Polish Zloty", 
-            "sympol": "PLN", 
+            "currency_type": 2,
+            "name": "Polish Zloty",
+            "ar_name":"زلوتي بولندي",
+            "sympol": "PLN",
             "country": "PL"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 108, 
+        "model": "currency.currency",
+        "pk": 108,
         "fields": {
-            "currency_type": 2, 
-            "name": "Paraguayan Guarani", 
-            "sympol": "PYG", 
+            "currency_type": 2,
+            "name": "Paraguayan Guarani",
+            "ar_name":"غواراني باراغوياني",
+            "sympol": "PYG",
             "country": "PY"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 109, 
+        "model": "currency.currency",
+        "pk": 109,
         "fields": {
-            "currency_type": 1, 
-            "name": "Qatari Riyal", 
-            "sympol": "QAR", 
+            "currency_type": 1,
+            "name": "Qatari Riyal",
+            "ar_name":"ريال قطري",
+            "sympol": "QAR",
             "country": "QA"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 110, 
+        "model": "currency.currency",
+        "pk": 110,
         "fields": {
-            "currency_type": 2, 
-            "name": "Romanian Leu", 
-            "sympol": "RON", 
+            "currency_type": 2,
+            "name": "Romanian Leu",
+            "ar_name":"ليو روماني",
+            "sympol": "RON",
             "country": "RO"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 111, 
+        "model": "currency.currency",
+        "pk": 111,
         "fields": {
-            "currency_type": 2, 
-            "name": "Serbian Dinar", 
-            "sympol": "RSD", 
+            "currency_type": 2,
+            "name": "Serbian Dinar",
+            "ar_name":"دينار صربي",
+            "sympol": "RSD",
             "country": "RS"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 112, 
+        "model": "currency.currency",
+        "pk": 112,
         "fields": {
-            "currency_type": 2, 
-            "name": "Russian Ruble", 
-            "sympol": "RUB", 
+            "currency_type": 2,
+            "name": "Russian Ruble",
+            "ar_name":"روبل روسي",
+            "sympol": "RUB",
             "country": "RU"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 113, 
+        "model": "currency.currency",
+        "pk": 113,
         "fields": {
-            "currency_type": 2, 
-            "name": "Rwandan Franc", 
-            "sympol": "RWF", 
+            "currency_type": 2,
+            "name": "Rwandan Franc",
+            "ar_name":"فرنك رواندي",
+            "sympol": "RWF",
             "country": "RW"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 114, 
+        "model": "currency.currency",
+        "pk": 114,
         "fields": {
-            "currency_type": 1, 
-            "name": "Saudi Arabian Riyal", 
-            "sympol": "SAR", 
+            "currency_type": 1,
+            "name": "Saudi Arabian Riyal",
+            "ar_name":"ريال سعودي",
+            "sympol": "SAR",
             "country": "SA"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 115, 
+        "model": "currency.currency",
+        "pk": 115,
         "fields": {
-            "currency_type": 2, 
-            "name": "Seychellois Rupee", 
-            "sympol": "SCR", 
+            "currency_type": 2,
+            "name": "Seychellois Rupee",
+            "ar_name":"روبية سيشيلية",
+            "sympol": "SCR",
             "country": "SC"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 116, 
+        "model": "currency.currency",
+        "pk": 116,
         "fields": {
-            "currency_type": 2, 
-            "name": "Sudanese Pound", 
-            "sympol": "SDG", 
+            "currency_type": 2,
+            "name": "Sudanese Pound",
+            "ar_name":"جنيه سوداني",
+            "sympol": "SDG",
             "country": "SD"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 117, 
+        "model": "currency.currency",
+        "pk": 117,
         "fields": {
-            "currency_type": 2, 
-            "name": "Swedish Krona", 
-            "sympol": "SEK", 
+            "currency_type": 2,
+            "name": "Swedish Krona",
+            "ar_name":"كرونة سويدية",
+            "sympol": "SEK",
             "country": "SE"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 118, 
+        "model": "currency.currency",
+        "pk": 118,
         "fields": {
-            "currency_type": 2, 
-            "name": "Singapore Dollar", 
-            "sympol": "SGD", 
+            "currency_type": 2,
+            "name": "Singapore Dollar",
+            "ar_name":"دولار سنغافوري",
+            "sympol": "SGD",
             "country": "SG"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 120, 
+        "model": "currency.currency",
+        "pk": 120,
         "fields": {
-            "currency_type": 2, 
-            "name": "Sierra Leonean Leone", 
-            "sympol": "SLL", 
+            "currency_type": 2,
+            "name": "Sierra Leonean Leone",
+            "ar_name":"ليون سيراليوني",
+            "sympol": "SLL",
             "country": "SL"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 121, 
+        "model": "currency.currency",
+        "pk": 121,
         "fields": {
-            "currency_type": 2, 
-            "name": "Somali Shilling", 
-            "sympol": "SOS", 
+            "currency_type": 2,
+            "name": "Somali Shilling",
+            "ar_name":"شلن صومالي",
+            "sympol": "SOS",
             "country": "SO"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 122, 
+        "model": "currency.currency",
+        "pk": 122,
         "fields": {
-            "currency_type": 2, 
-            "name": "Surinamese Dollar", 
-            "sympol": "SRD", 
+            "currency_type": 2,
+            "name": "Surinamese Dollar",
+            "ar_name":"دولار سورينامي",
+            "sympol": "SRD",
             "country": "SR"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 123, 
+        "model": "currency.currency",
+        "pk": 123,
         "fields": {
-            "currency_type": 2, 
-            "name": "Sao Tome And Principe Dobra", 
-            "sympol": "STN", 
+            "currency_type": 2,
+            "name": "Sao Tome And Principe Dobra",
+            "ar_name":"دوبرا ساو تومي وبرينسيبي",
+            "sympol": "STN",
             "country": "ST"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 125, 
+        "model": "currency.currency",
+        "pk": 125,
         "fields": {
-            "currency_type": 2, 
-            "name": "Swazi Lilangeni", 
-            "sympol": "SZL", 
+            "currency_type": 2,
+            "name": "Swazi Lilangeni",
+            "ar_name":"ليلانجيني سوازي",
+            "sympol": "SZL",
             "country": "SZ"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 126, 
+        "model": "currency.currency",
+        "pk": 126,
         "fields": {
-            "currency_type": 2, 
-            "name": "Thai Baht", 
-            "sympol": "THB", 
+            "currency_type": 2,
+            "name": "Thai Baht",
+            "ar_name":"بات تايلاندي",
+            "sympol": "THB",
             "country": "TH"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 127, 
+        "model": "currency.currency",
+        "pk": 127,
         "fields": {
-            "currency_type": 2, 
-            "name": "Tajikistani Somoni", 
-            "sympol": "TJS", 
+            "currency_type": 2,
+            "name": "Tajikistani Somoni",
+            "ar_name":"سوموني طاجيكستاني",
+            "sympol": "TJS",
             "country": "TJ"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 128, 
+        "model": "currency.currency",
+        "pk": 128,
         "fields": {
-            "currency_type": 2, 
-            "name": "Turkmen Manat", 
-            "sympol": "TMT", 
+            "currency_type": 2,
+            "name": "Turkmen Manat",
+            "ar_name":"مانات تركماني",
+            "sympol": "TMT",
             "country": "TM"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 129, 
+        "model": "currency.currency",
+        "pk": 129,
         "fields": {
-            "currency_type": 2, 
-            "name": "Tunisian Dinar", 
-            "sympol": "TND", 
+            "currency_type": 2,
+            "name": "Tunisian Dinar",
+            "ar_name":"دينار تونسي",
+            "sympol": "TND",
             "country": "TN"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 130, 
+        "model": "currency.currency",
+        "pk": 130,
         "fields": {
-            "currency_type": 2, 
-            "name": "Tongan Pa†anga", 
-            "sympol": "TOP", 
+            "currency_type": 2,
+            "name": "Tongan Pa†anga",
+            "ar_name":"تونجا با أنجا",
+            "sympol": "TOP",
             "country": "TO"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 131, 
+        "model": "currency.currency",
+        "pk": 131,
         "fields": {
-            "currency_type": 2, 
-            "name": "Turkish Lira", 
-            "sympol": "TRY", 
+            "currency_type": 2,
+            "name": "Turkish Lira",
+            "ar_name":"ليرة تركية",
+            "sympol": "TRY",
             "country": "TR"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 132, 
+        "model": "currency.currency",
+        "pk": 132,
         "fields": {
-            "currency_type": 2, 
-            "name": "Trinidad And Tobago Dollar", 
-            "sympol": "TTD", 
+            "currency_type": 2,
+            "name": "Trinidad And Tobago Dollar",
+            "ar_name":"دولار ترندادي",
+            "sympol": "TTD",
             "country": "TT"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 133, 
+        "model": "currency.currency",
+        "pk": 133,
         "fields": {
-            "currency_type": 2, 
-            "name": "New Taiwan Dollar", 
-            "sympol": "TWD", 
+            "currency_type": 2,
+            "name": "New Taiwan Dollar",
+            "ar_name":"دولار تايواني",
+            "sympol": "TWD",
             "country": "TW"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 134, 
+        "model": "currency.currency",
+        "pk": 134,
         "fields": {
-            "currency_type": 2, 
-            "name": "Tanzanian Shilling", 
-            "sympol": "TZS", 
+            "currency_type": 2,
+            "name": "Tanzanian Shilling",
+            "ar_name":"شلن تنزاني",
+            "sympol": "TZS",
             "country": "TZ"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 135, 
+        "model": "currency.currency",
+        "pk": 135,
         "fields": {
-            "currency_type": 2, 
-            "name": "Ukrainian Hryvnia", 
-            "sympol": "UAH", 
+            "currency_type": 2,
+            "name": "Ukrainian Hryvnia",
+            "ar_name":"هريفنيا اوكرانية",
+            "sympol": "UAH",
             "country": "UA"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 136, 
+        "model": "currency.currency",
+        "pk": 136,
         "fields": {
-            "currency_type": 2, 
-            "name": "Ugandan Shilling", 
-            "sympol": "UGX", 
+            "currency_type": 2,
+            "name": "Ugandan Shilling",
+            "ar_name":"شلن اوغندي",
+            "sympol": "UGX",
             "country": "UG"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 137, 
+        "model": "currency.currency",
+        "pk": 137,
         "fields": {
-            "currency_type": 1, 
-            "name": "United Status Dollar", 
-            "sympol": "USD", 
+            "currency_type": 1,
+            "name": "United Status Dollar",
+            "ar_name":"دولار امريكي",
+            "sympol": "USD",
             "country": "US"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 138, 
+        "model": "currency.currency",
+        "pk": 138,
         "fields": {
-            "currency_type": 2, 
-            "name": "Uruguayan Peso", 
-            "sympol": "UYU", 
+            "currency_type": 2,
+            "name": "Uruguayan Peso",
+            "ar_name":"بيزو اوروغوياني",
+            "sympol": "UYU",
             "country": "UY"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 139, 
+        "model": "currency.currency",
+        "pk": 139,
         "fields": {
-            "currency_type": 2, 
-            "name": "Uzbekistani Som", 
-            "sympol": "UZS", 
+            "currency_type": 2,
+            "name": "Uzbekistani Som",
+            "ar_name":"سوم أوزبكستانى",
+            "sympol": "UZS",
             "country": "UZ"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 141, 
+        "model": "currency.currency",
+        "pk": 141,
         "fields": {
-            "currency_type": 2, 
-            "name": "Vietnamese Dong", 
-            "sympol": "VND", 
+            "currency_type": 2,
+            "name": "Vietnamese Dong",
+            "ar_name":"دونج فيتنامي",
+            "sympol": "VND",
             "country": "VN"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 142, 
+        "model": "currency.currency",
+        "pk": 142,
         "fields": {
-            "currency_type": 2, 
-            "name": "Vanuatu Vatu", 
-            "sympol": "VUV", 
+            "currency_type": 2,
+            "name": "Vanuatu Vatu",
+            "ar_name":"فاتو فانواتي",
+            "sympol": "VUV",
             "country": "VU"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 144, 
+        "model": "currency.currency",
+        "pk": 144,
         "fields": {
-            "currency_type": 2, 
-            "name": "Central African CFA Franc", 
-            "sympol": "XAF", 
+            "currency_type": 2,
+            "name": "Central African CFA Franc",
+            "ar_name":"فرنك وسط أفريفيا",
+            "sympol": "XAF",
             "country": "XA"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 145, 
+        "model": "currency.currency",
+        "pk": 145,
         "fields": {
-            "currency_type": 3, 
-            "name": "Silver", 
-            "sympol": "XAG", 
+            "currency_type": 3,
+            "name": "Silver",
+            "ar_name":"الفضة",
+            "sympol": "XAG",
             "country": "XA"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 146, 
+        "model": "currency.currency",
+        "pk": 146,
         "fields": {
-            "currency_type": 3, 
-            "name": "Gold", 
-            "sympol": "XAU", 
+            "currency_type": 3,
+            "name": "Gold",
+            "ar_name":"الذهب",
+            "sympol": "XAU",
             "country": "XA"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 148, 
+        "model": "currency.currency",
+        "pk": 148,
         "fields": {
-            "currency_type": 2, 
-            "name": "West African CFA Franc", 
-            "sympol": "XOF", 
+            "currency_type": 2,
+            "name": "West African CFA Franc",
+            "ar_name":"فرنك غرب أفريقيا",
+            "sympol": "XOF",
             "country": "XO"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 149, 
+        "model": "currency.currency",
+        "pk": 149,
         "fields": {
-            "currency_type": 3, 
-            "name": "Palladium", 
-            "sympol": "XPD", 
+            "currency_type": 3,
+            "name": "Palladium",
+            "ar_name":"البلاديوم",
+            "sympol": "XPD",
             "country": "XP"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 150, 
+        "model": "currency.currency",
+        "pk": 150,
         "fields": {
-            "currency_type": 2, 
-            "name": "CFP Franc", 
-            "sympol": "XPF", 
+            "currency_type": 2,
+            "name": "CFP Franc",
+            "ar_name":"فرنك سي إف بي",
+            "sympol": "XPF",
             "country": "XP"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 151, 
+        "model": "currency.currency",
+        "pk": 151,
         "fields": {
-            "currency_type": 3, 
-            "name": "Platinum", 
-            "sympol": "XPT", 
+            "currency_type": 3,
+            "name": "Platinum",
+            "ar_name":"البلاتنيوم",
+            "sympol": "XPT",
             "country": "XP"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 153, 
+        "model": "currency.currency",
+        "pk": 153,
         "fields": {
-            "currency_type": 2, 
-            "name": "Yemeni Rial", 
-            "sympol": "YER", 
+            "currency_type": 2,
+            "name": "Yemeni Rial",
+            "ar_name":"ريال يمني",
+            "sympol": "YER",
             "country": "YE"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 154, 
+        "model": "currency.currency",
+        "pk": 154,
         "fields": {
-            "currency_type": 2, 
-            "name": "South African Rand", 
-            "sympol": "ZAR", 
+            "currency_type": 2,
+            "name": "South African Rand",
+            "ar_name":"راند جنوب افريقيا",
+            "sympol": "ZAR",
             "country": "ZA"
         }
-    }, 
+    },
     {
-        "model": "currency.currency", 
-        "pk": 156, 
+        "model": "currency.currency",
+        "pk": 156,
         "fields": {
-            "currency_type": 2, 
-            "name": "Zambian Kwacha", 
-            "sympol": "ZMW", 
+            "currency_type": 2,
+            "name": "Zambian Kwacha",
+            "ar_name":"كواشا زامبية",
+            "sympol": "ZMW",
             "country": "ZM"
         }
     }]

@@ -200,3 +200,37 @@ def handle_comments(request):
             'status': status.HTTP_400_BAD_REQUEST
         }
     return Response(data=response['data'], status=response['status'])
+
+
+@api_view(['POST'])
+@permission_classes([])
+def calculator(request):
+    first_currency = Currency.objects.get(
+        sympol=request.data['first_currency'])
+    second_currency = Currency.objects.get(
+        sympol=request.data['second_currency'])
+    data = {}
+    if first_currency.currency_type.base_currency:
+        value = ComparisonDetails.objects.filter(
+            comparison__base_currency=first_currency,
+            normal_currency=second_currency,
+        ).order_by('-comparison__date').first().bye_value
+        data = {'result': str(
+            round(value*float(request.data['amount']), 2)) + f' {second_currency.sympol}'}
+    elif second_currency.currency_type.base_currency:
+        value = ComparisonDetails.objects.filter(
+            comparison__base_currency=second_currency,
+            normal_currency=first_currency,
+        ).order_by('-comparison__date').first().bye_value
+        data = {'result': str(
+            round(1/value*float(request.data['amount']), 2)) + f' {second_currency.sympol}'}
+    else:
+        crequest = requests.get(
+            f'https://api.metalpriceapi.com/v1/latest?api_key=6d738f6d27f371d626809920ef29112f&base={first_currency.sympol}&currencies={second_currency.sympol}')
+        res = crequest.json()
+        print(res)
+        data = {'result': str(round(
+            float(res['rates'][second_currency.sympol]) *
+            float(request.data['amount']), 2
+        )) + f' {second_currency.sympol}'}
+    return Response(data=data, status=status.HTTP_200_OK)

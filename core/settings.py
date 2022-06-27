@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'social_django',
     'drf_social_oauth2',
     'django_countries',
+    'mathfilters',
     # 'django_celery_beat',
 ]
 

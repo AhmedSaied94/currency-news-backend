@@ -2,7 +2,7 @@
 from schedule import Scheduler
 import threading
 import time
-from currency.models import Currency, Comparison, ComparisonDetails, DayValues, DayValuesLowHigh, News, NewsAsset, Paragraph
+from currency.models import Currency, Comparison, ComparisonDetails, DayValues, DayValuesLowHigh, News, NewsAsset, Paragraph, ProfitMarginDetails
 import requests
 from django.utils import timezone
 from datetime import datetime, timedelta, time as Time
@@ -107,17 +107,21 @@ def new_exchange():
                             assets = fall_assets
                         else:
                             assets = stability_assets
-                        cur_name_ar = translator.translate(
-                            cur.name, dest='ar').text
+                        cur_name_ar = 'ال '+cur.ar_name.split(' ')[0]+'ال '+cur.ar_name.split(' ')[1] if len(cur.ar_name.split(' ')) == 2 else cur_name_ar
                         country_name_ar = translator.translate(
                             normal_currency.country.name, dest='ar').text
                         date_ar = translator.translate(
                             comparison.date.strftime("%A %-d %B, %Y"), dest='ar').text
                         normal_cur_ar = translator.translate(
                             normal_currency.name, dest='ar').text
+                        margin = ProfitMarginDetails.objects.filter(
+                            profit_margin__base_currency=cur,
+                            normal_currency=normal_currency
+                        )
+                        sell_value = round(comparison_details.bye_value+margin.first().value, 2) if margin.exists() else comparison_details.bye_value
 
                         if cur.currency_type == 'Metals':
-                            header = f"سعر ال{cur_name_ar} في {country_name_ar} اليوم {date_ar}"
+                            header = f"سعر {cur_name_ar} في {country_name_ar} اليوم {date_ar}"
                             sub_header = f"سعر ال{cur_name_ar} في اليوم {date_ar} مقابل ال{translator.translate(normal_currency.name, dest='ar')}"
                             pqs = Paragraph.objects.filter(currency=cur)
 
@@ -139,7 +143,7 @@ def new_exchange():
                             header = f"سعر ال{cur_name_ar} في {country_name_ar} اليوم {date_ar}"
                             sub_header = f"سعر ال{cur_name_ar} في اليوم {date_ar} مقابل ال{translator.translate(normal_currency.name, dest='ar')}"
                             body1 = f"{random.choice(assets).asset} سعر ال{cur_name_ar} اليوم في {country_name_ar} خلال تعاملات {date_ar} في مستهل التعاملات في البنوك واسواق الصرافة في {country_name_ar}"
-                            body2 = f"{random.choice(assets).asset} سعر ال{cur_name_ar} في {country_name_ar} عند {round(comparison_details.bye_value, 2)} {normal_cur_ar} بحسب السعر المعلن من البنك المركزي والبنوك المحلية خلال التعاملات الرسمية"
+                            body2 = f"{random.choice(assets).asset} سعر ال{cur_name_ar} في {country_name_ar} عند {round(comparison_details.bye_value, 2)} {normal_cur_ar} للشراء مقابل {sell_value+' '+normal_cur_ar} للبيع بحسب السعر المعلن من البنك المركزي والبنوك المحلية خلال التعاملات الرسمية"
                             news = News.objects.create(
                                 date=comparison.date,
                                 base_currency=cur,

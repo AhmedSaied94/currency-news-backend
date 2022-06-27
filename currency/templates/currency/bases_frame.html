@@ -1,0 +1,80 @@
+{% extends 'main/base.html' %}
+{% load mathfilters %}
+
+{% block main %}
+<!-- {{ data|json_script:"data" }} -->
+
+<div>
+    <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
+        {% for baseKey in bases %}
+        <div onclick="changeView('{{baseKey}}')" class="rounded-pill" style="margin:  0.5rem; cursor: pointer; width: fit-content; padding-right: 1rem; background-color: #4a494933; font-size: 0.8em; font-weight: bolder; display: flex; align-items: center;">
+            <img class="rounded-circle" style="background-color: #fff; width: 25px; height: 25px; margin-right: 0.5rem;" src="https://countryflagsapi.com/svg/{{baseKey|slice:2|lower}}" > {{baseKey}}
+        </div>
+        {% endfor %}
+    </div>
+
+    <table class="table table-hover">
+
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Bye</td>
+                <td>Sell</td>
+                <td>24h</td>
+            </tr>
+        </thead>
+        <tbody id="view">
+            {% for com in data %}
+
+            <tr>
+                <td> <img class="rounded-circle" style="width: 30px; height: 30px; margin-right: 0.5rem;" src="https://countryflagsapi.com/svg/{{com.normal_currency.sympol|slice:2|lower}}" /> {{ com.normal_currency.name }}</td>
+                <td>{{com.bye_value|floatformat:2}} {{com.normal_currency.sympol}}</td>
+                <td>{{ com.bye_value|addition:0.15|floatformat:2 }} {{com.normal_currency.sympol}}</td>
+                <td>24h</td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+
+    // var data = JSON.parse(document.getElementById("data").textContent)
+    // var s = {{data|safe}}
+    // console.log(s)
+    const fetchData = async (sympol) =>{
+        const res = await fetch('http://localhost:8000/frame-data/', {
+            method:'POST',
+            headers:{
+                'Content-type':'application/json'
+            },
+            body:JSON.stringify({sympol})
+        })
+        const data = await res.json()
+        return data
+    }
+
+    const changeView = async (sympol) => {
+        const data = await fetchData(sympol)
+        const htmlArr = data.map(com => {
+            return(
+            `<tr>
+                <td> <img class="rounded-circle" style="width: 30px; height: 30px; margin-right: 0.5rem;" src="https://countryflagsapi.com/svg/${com.normal_currency.sympol.substring(0,2).toLowerCase()}" /> {{ com.normal_currency.name }}</td>
+                <td>${Math.round((com.bye_value +Number.EPSILON)*100)/100} ${com.normal_currency.sympol}</td>
+                <td>${ Math.round((com.bye_value+0.15+Number.EPSILON)*100)/100 } ${com.normal_currency.sympol}</td>
+                <td>24h</td>
+            </tr>`
+            )
+        })
+        document.getElementById('view').innerHTML = htmlArr.join(' ')
+    }
+    // const views = document.querySelectorAll('.table')
+    // const changeView = sympol => {
+    //     for (let index = 0; index < views.length; index++) {
+    //         views[index].style.display='none';
+    //     }
+    //     document.getElementById(sympol).style.display='block'
+    // }
+
+</script>
+{% endblock %}

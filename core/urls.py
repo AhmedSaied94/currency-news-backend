@@ -16,13 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
-from currency.views import iframe
+from currency.views import iframe, bases_to_arabic, frame_data
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/account/', include('account.api.v1.urls')),
     path('api/', include('currency.api.v1.urls')),
-    path('iframe/', iframe, name='iframe')
+    path('iframe/', iframe, name='iframe'),
+    path('bases_frame/', bases_to_arabic, name='bases_frame'),
+    path('frame-data/', frame_data, name='frame-data')
+
 ]
 
 

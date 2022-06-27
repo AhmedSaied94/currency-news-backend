@@ -12,6 +12,7 @@ urlpatterns = [
          get_news, name='news-details'),
     path('handle-likes/', handle_likes, name='handle-likes'),
     path('handle-comments/', handle_comments, name='handle-comments'),
-    path('handle-favorites/', handle_favorites, name='handle-favorites')
+    path('handle-favorites/', handle_favorites, name='handle-favorites'),
+    path('calculator/', calculator, name='calculator')
 
 ]

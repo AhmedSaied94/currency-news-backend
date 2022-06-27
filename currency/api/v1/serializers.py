@@ -57,6 +57,7 @@ class NewsSerializer(serializers.ModelSerializer):
     close_value = serializers.SerializerMethodField()
     cur_name = serializers.SerializerMethodField()
     likes = serializers.SerializerMethodField()
+    profit_margin = serializers.SerializerMethodField()
 
     class Meta:
         model = News
@@ -72,8 +73,18 @@ class NewsSerializer(serializers.ModelSerializer):
             'cur_name',
             'ar_date',
             'close_value',
-            'likes'
+            'likes',
+            'profit_margin'
         ]
+
+
+    def get_profit_margin(self, obj):
+
+        margin = ProfitMarginDetails.objects.filter(
+        profit_margin__base_currency=obj.base_currency,
+        normal_currency=obj.normal_currency
+        )
+        return margin.first().value if margin.exists() else None
 
     def get_comments(self, obj):
         return CommentSerialzer(
@@ -101,6 +112,7 @@ class NewsSerializer(serializers.ModelSerializer):
                 comparison__base_currency=obj.base_currency,
                 normal_currency=obj.normal_currency
             ).bye_value
+
             values = {
                 '12': calc_values(value, 12),
                 '14': calc_values(value, 14),
@@ -123,9 +135,9 @@ class NewsSerializer(serializers.ModelSerializer):
         if not self.context:
             return None
         if obj.base_currency.name == 'Gold' or obj.base_currency.name == 'Silver':
-
+            print(obj.base_currency, obj.normal_currency)
             value = ComparisonDetails.objects.filter(
-                comparison__date__date=obj.date.date()-timedelta(days=10),
+                comparison__date__date=obj.date.date()-timedelta(days=1),
                 comparison__base_currency=obj.base_currency,
                 normal_currency=obj.normal_currency,
                 close_price=True
@@ -151,23 +163,48 @@ class NewsSerializer(serializers.ModelSerializer):
     def get_cur_name(self, obj):
         if self.context:
             return {
-                'normal': translator.translate(
-                    obj.normal_currency.name, src='en', dest='ar').text,
-                'base': translator.translate(
-                    obj.base_currency.name, src='en', dest='ar').text,
+                'normal': obj.normal_currency.ar_name,
+                'base': obj.base_currency.ar_name,
                 'country': translator.translate(obj.normal_currency.country.name, src='en', dest='ar').text
             }
 
 
 class ComparisonDetailsSerializer(serializers.ModelSerializer):
-    normal_currency = NewRepresent()
+    normal_currency = serializers.SerializerMethodField()
+    h24 = serializers.SerializerMethodField()
+    sell_value = serializers.SerializerMethodField()
 
     class Meta:
         model = ComparisonDetails
         fields = [
             'normal_currency',
             'bye_value',
+            'h24',
+            'sell_value'
         ]
+
+    def get_normal_currency(self, obj):
+        return {
+            "name": obj.normal_currency.name,
+            "sympol": obj.normal_currency.sympol,
+        }
+
+    def get_sell_value(self, obj):
+
+        margin = ProfitMarginDetails.objects.filter(
+        profit_margin__base_currency=obj.comparison.base_currency,
+        normal_currency=obj.normal_currency
+        )
+        return obj.bye_value + margin.first().value if margin.exists() else obj.bye_value
+
+    def get_h24(self, obj):
+        close = ComparisonDetails.objects.filter(
+            comparison__base_currency=obj.comparison.base_currency,
+            normal_currency=obj.normal_currency,
+            close_price=True
+        ).order_by('-comparison__date').first().bye_value
+        print((obj.bye_value-close)/close*100)
+        return round((obj.bye_value-close)/close*100, 3)
 
 
 class ComparisonSerializer(serializers.ModelSerializer):
@@ -225,8 +262,9 @@ class CurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
     #     ).data
 
     def get_news(self, obj):
+        qs = obj.normal_news.all() if not obj.currency_type.base_currency else obj.base_news.all()
         news = NewsSerializer(
-            instance=obj.normal_news.all().order_by('-date'),
+            instance=qs.order_by('-date'),
             many=True
         ).data
         return news
@@ -257,7 +295,7 @@ class CurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
         base = obj if obj.currency_type.base_currency else self.context['base']
         home = obj if not obj.currency_type.base_currency else self.context['home']
         qs = DayValuesLowHigh.objects.filter(
-            day_values__date__range=(today-timedelta(days=10), today),
+            day_values__date__range=(today-timedelta(days=22), today),
             day_values__base_currency=base,
             normal_currency=home
         )
@@ -277,7 +315,7 @@ class CurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
         base = obj if obj.currency_type.base_currency else self.context['base']
         home = obj if not obj.currency_type.base_currency else self.context['home']
         day_low_high = DayValuesLowHigh.objects.get(
-            day_values__date=datetime.today()-timedelta(days=10),
+            day_values__date=datetime.today()-timedelta(days=22),
             day_values__base_currency=base,
             normal_currency=home
         )
@@ -297,7 +335,7 @@ class CurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
         base = obj if obj.currency_type.base_currency else self.context['base']
         home = obj if not obj.currency_type.base_currency else self.context['home']
         price = ComparisonDetails.objects.filter(
-            comparison__date__date=datetime.today() - timedelta(days=10),
+            comparison__date__date=datetime.today() - timedelta(days=22),
             comparison__base_currency=base,
             normal_currency=home,
             open_price=True
@@ -309,7 +347,7 @@ class CurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
         base = obj if obj.currency_type.base_currency else self.context['base']
         home = obj if not obj.currency_type.base_currency else self.context['home']
         price = ComparisonDetails.objects.filter(
-            comparison__date__date=datetime.today() - timedelta(days=10),
+            comparison__date__date=datetime.today() - timedelta(days=22),
             comparison__base_currency=base,
             normal_currency=home,
             close_price=True
@@ -324,7 +362,7 @@ class CurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
         qs = ComparisonDetails.objects.filter(
             comparison__base_currency=base,
             comparison__date__range=(
-                datetime.today()-timedelta(days=10), datetime.today()-timedelta(days=1)),
+                datetime.today()-timedelta(days=22), datetime.today()-timedelta(days=1)),
             normal_currency=home,
             close_price=True
         ).order_by('comparison__date')
@@ -365,6 +403,7 @@ class AllCurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
     open_price = serializers.SerializerMethodField()
     close_price = serializers.SerializerMethodField()
     last7graph = serializers.SerializerMethodField()
+    profit_margin = serializers.SerializerMethodField()
 
     class Meta:
         model = Currency
@@ -381,6 +420,7 @@ class AllCurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
             'open_price',
             'close_price',
             'last7graph',
+            'profit_margin',
         ]
 
     # def get_news(self, obj):
@@ -409,7 +449,7 @@ class AllCurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
         today = datetime.today()
         home = self.context['home']
         qs = DayValuesLowHigh.objects.filter(
-            day_values__date__range=(today-timedelta(days=10), today),
+            day_values__date__range=(today-timedelta(days=22), today),
             day_values__base_currency=obj,
             normal_currency=home
         )
@@ -422,7 +462,7 @@ class AllCurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
     def get_day_low_high(self, obj):
         home = self.context['home']
         day_low_high = DayValuesLowHigh.objects.get(
-            day_values__date=datetime.today()-timedelta(days=10),
+            day_values__date=datetime.today()-timedelta(days=22),
             day_values__base_currency=obj,
             normal_currency=home
         )
@@ -434,7 +474,7 @@ class AllCurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
     def get_open_price(self, obj):
         home = self.context['home']
         return ComparisonDetails.objects.filter(
-            comparison__date__date=datetime.today() - timedelta(days=10),
+            comparison__date__date=datetime.today() - timedelta(days=22),
             comparison__base_currency=obj,
             normal_currency=home,
             open_price=True
@@ -443,7 +483,7 @@ class AllCurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
     def get_close_price(self, obj):
         home = self.context['home']
         return ComparisonDetails.objects.filter(
-            comparison__date__date=datetime.today() - timedelta(days=10),
+            comparison__date__date=datetime.today() - timedelta(days=22),
             comparison__base_currency=obj,
             normal_currency=home,
             close_price=True
@@ -454,13 +494,22 @@ class AllCurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
         qs = ComparisonDetails.objects.filter(
             comparison__base_currency=obj,
             comparison__date__range=(
-                datetime.today()-timedelta(days=10), datetime.today()-timedelta(1)),
+                datetime.today()-timedelta(days=22), datetime.today()-timedelta(1)),
             normal_currency=self.context['home'],
             close_price=True
         ).order_by('comparison__date')
         for ins in qs:
             lista.append(ins.bye_value)
         return lista
+
+    def get_profit_margin(self, obj):
+
+        margin = ProfitMarginDetails.objects.filter(
+        profit_margin__base_currency=obj,
+        normal_currency=self.context['home']
+        )
+        return margin.first().value if margin.exists() else None
+
 
 
 class CurrencySympolsSerializer(serializers.ModelSerializer):
