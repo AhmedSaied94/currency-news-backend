@@ -65,6 +65,8 @@ INSTALLED_APPS = [
     'drf_social_oauth2',
     'django_countries',
     'mathfilters',
+    'gunicorn',
+    'whitenoise',
     # 'django_celery_beat',
 ]
 
@@ -118,10 +120,10 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'currencynews',
+        'NAME': 'srrafa',
         'HOST': 'localhost',
-        'USER': 'curnews',
-        'PASSWORD': 'curnews',
+        'USER': 'srrafa',
+        'PASSWORD': 'srrafa.com',
         'PORT': '',
     }
 }
