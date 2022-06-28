@@ -25,6 +25,9 @@ arabic-reshaper = "*"
 python-bidi = "*"
 googletrans = "==3.1.0a0"
 django-mathfilters = "*"
+whitenoise = "*"
+gunicorn = "*"
+
 
 [dev-packages]
 autopep8 = "*"

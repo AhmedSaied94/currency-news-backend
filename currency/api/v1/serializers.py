@@ -1,5 +1,3 @@
-from locale import currency
-from multiprocessing import context
 from turtle import home
 from rest_framework import serializers
 from currency.models import *
