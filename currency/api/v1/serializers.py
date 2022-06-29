@@ -1,4 +1,3 @@
-from turtle import home
 from rest_framework import serializers
 from currency.models import *
 from datetime import date, datetime, timedelta
