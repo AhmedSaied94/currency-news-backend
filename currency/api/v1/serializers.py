@@ -295,7 +295,7 @@ class CurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
         base = obj if obj.currency_type.base_currency else self.context['base']
         home = obj if not obj.currency_type.base_currency else self.context['home']
         qs = DayValuesLowHigh.objects.filter(
-            day_values__date__range=(today-timedelta(days=41), today),
+            day_values__date__range=(today-timedelta(days=42), today),
             day_values__base_currency=base,
             normal_currency=home
         )
@@ -315,7 +315,7 @@ class CurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
         base = obj if obj.currency_type.base_currency else self.context['base']
         home = obj if not obj.currency_type.base_currency else self.context['home']
         day_low_high = DayValuesLowHigh.objects.get(
-            day_values__date=datetime.today()-timedelta(days=41),
+            day_values__date=datetime.today()-timedelta(days=42),
             day_values__base_currency=base,
             normal_currency=home
         )
@@ -335,7 +335,7 @@ class CurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
         base = obj if obj.currency_type.base_currency else self.context['base']
         home = obj if not obj.currency_type.base_currency else self.context['home']
         price = ComparisonDetails.objects.filter(
-            comparison__date__date=datetime.today() - timedelta(days=41),
+            comparison__date__date=datetime.today() - timedelta(days=42),
             comparison__base_currency=base,
             normal_currency=home,
             open_price=True
@@ -347,7 +347,7 @@ class CurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
         base = obj if obj.currency_type.base_currency else self.context['base']
         home = obj if not obj.currency_type.base_currency else self.context['home']
         price = ComparisonDetails.objects.filter(
-            comparison__date__date=datetime.today() - timedelta(days=41),
+            comparison__date__date=datetime.today() - timedelta(days=42),
             comparison__base_currency=base,
             normal_currency=home,
             close_price=True
@@ -362,7 +362,7 @@ class CurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
         qs = ComparisonDetails.objects.filter(
             comparison__base_currency=base,
             comparison__date__range=(
-                datetime.today()-timedelta(days=41), datetime.today()-timedelta(days=1)),
+                datetime.today()-timedelta(days=42), datetime.today()-timedelta(days=1)),
             normal_currency=home,
             close_price=True
         ).order_by('comparison__date')
@@ -450,7 +450,7 @@ class AllCurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
         today = datetime.today()
         home = self.context['home']
         qs = DayValuesLowHigh.objects.filter(
-            day_values__date__range=(today-timedelta(days=41), today),
+            day_values__date__range=(today-timedelta(days=42), today),
             day_values__base_currency=obj,
             normal_currency=home
         )
@@ -463,7 +463,7 @@ class AllCurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
     def get_day_low_high(self, obj):
         home = self.context['home']
         day_low_high = DayValuesLowHigh.objects.get(
-            day_values__date=datetime.today()-timedelta(days=41),
+            day_values__date=datetime.today()-timedelta(days=42),
             day_values__base_currency=obj,
             normal_currency=home
         )
@@ -475,7 +475,7 @@ class AllCurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
     def get_open_price(self, obj):
         home = self.context['home']
         return ComparisonDetails.objects.filter(
-            comparison__date__date=datetime.today() - timedelta(days=41),
+            comparison__date__date=datetime.today() - timedelta(days=42),
             comparison__base_currency=obj,
             normal_currency=home,
             open_price=True
@@ -484,7 +484,7 @@ class AllCurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
     def get_close_price(self, obj):
         home = self.context['home']
         return ComparisonDetails.objects.filter(
-            comparison__date__date=datetime.today() - timedelta(days=41),
+            comparison__date__date=datetime.today() - timedelta(days=42),
             comparison__base_currency=obj,
             normal_currency=home,
             close_price=True
@@ -495,7 +495,7 @@ class AllCurrencySerializer(CountryFieldMixin, serializers.ModelSerializer):
         qs = ComparisonDetails.objects.filter(
             comparison__base_currency=obj,
             comparison__date__range=(
-                datetime.today()-timedelta(days=41), datetime.today()-timedelta(1)),
+                datetime.today()-timedelta(days=42), datetime.today()-timedelta(1)),
             normal_currency=self.context['home'],
             close_price=True
         ).order_by('comparison__date')

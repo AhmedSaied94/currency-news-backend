@@ -7,6 +7,7 @@ from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly
 from currency.models import *
 from .serializers import *
 import requests
+from django.db.models import Q
 
 
 @api_view(['GET'])
@@ -234,3 +235,15 @@ def calculator(request):
             float(request.data['amount']), 2
         )) + f' {second_currency.sympol}'}
     return Response(data=data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+@permission_classes([])
+def search_cur(request):
+    query = request.GET.get('cur')
+    qs = Currency.objects.filter(
+        Q(name__contains=query) | Q(
+            sympol__contains=query) | Q(ar_name__contains=query)
+    )
+    ser_curs = CurrencySympolsSerializer(instance=qs, many=True)
+    return Response(data=ser_curs.data, status=status.HTTP_200_OK)
