@@ -13,6 +13,7 @@ urlpatterns = [
     path('handle-likes/', handle_likes, name='handle-likes'),
     path('handle-comments/', handle_comments, name='handle-comments'),
     path('handle-favorites/', handle_favorites, name='handle-favorites'),
-    path('calculator/', calculator, name='calculator')
+    path('calculator/', calculator, name='calculator'),
+    path('search/', search_cur, name='search')
 
 ]
