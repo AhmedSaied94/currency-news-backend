@@ -1,4 +1,3 @@
-from curses import window
 from django.apps import AppConfig
 import os
 
