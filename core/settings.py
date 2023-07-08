@@ -36,7 +36,7 @@ else:
     SECRET_KEY = os.environ['PRODUCTION_KEY']
 
 CORS_ALLOW_ALL_ORIGINS = True
-ALLOWED_HOSTS = ['38.242.255.43', 'localhost']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
