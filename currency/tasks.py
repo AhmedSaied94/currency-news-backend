@@ -18,82 +18,86 @@ translator = Translator()
 #     # print(5+9)
 #     return x + y
 
-ar_curs_sympols = ['EGP', 'AED', 'IQD', 'BHD', 'QAR', 'OMR', 'KWD', 'JOD',
-                   'LBP', 'LYD', 'DZD', 'MAD', 'SAR', 'YER', 'TRY', 'SDG', 'TND']
+ar_curs_sympols = ["EGP", "AED", "IQD", "BHD", "QAR", "OMR", "KWD", "JOD", "LBP", "LYD", "DZD", "MAD", "SAR", "YER", "TRY", "SDG", "TND"]
 
 ar_curs = Currency.objects.filter(sympol__in=ar_curs_sympols)
 
-other_curs_sympols = ["CAD", "CHF", "CNY", "EUR", "GBP", "JPY", 'USD', 'MYR',
-                      'PKR', 'RUB', 'MYR', 'MXN', 'ISK', 'IDR', 'DKK', 'CZK', 'BRL', 'ARS']
+other_curs_sympols = ["CAD", "CHF", "CNY", "EUR", "GBP", "JPY", "USD", "MYR", "PKR", "RUB", "MYR", "MXN", "ISK", "IDR", "DKK", "CZK", "BRL", "ARS"]
 
 other_curs = Currency.objects.filter(sympol__in=other_curs_sympols)
 
 
 def new_exchange():
-    rise_assets = NewsAsset.objects.filter(asset_type__asset_type='rise')
-    fall_assets = NewsAsset.objects.filter(asset_type__asset_type='fall')
-    stability_assets = NewsAsset.objects.filter(
-        asset_type__asset_type='stability')
+    rise_assets = NewsAsset.objects.filter(asset_type__asset_type="rise")
+    fall_assets = NewsAsset.objects.filter(asset_type__asset_type="fall")
+    stability_assets = NewsAsset.objects.filter(asset_type__asset_type="stability")
 
-    bases_currencies = Currency.objects.filter(
-        currency_type__base_currency=True)
+    bases_currencies = Currency.objects.filter(currency_type__base_currency=True)
     for cur in bases_currencies:
         try:
-            request = requests.get(
-                f'https://api.metalpriceapi.com/v1/latest?api_key=6d738f6d27f371d626809920ef29112f&base={cur.sympol}'
-            )
-            data = request.json()['rates']
+            request = requests.get(f"https://api.metalpriceapi.com/v1/latest?api_key=cf82109dec1276ecd703a3cb054b6029&base={cur.sympol}")
+            print(request.json())
+            data = request.json()["rates"]
         except Exception as e:
             print(str(e))
             continue
         comparison = Comparison.objects.create(
             base_currency=cur,
         )
-        time = datetime.strptime(comparison.date.strftime(
-            "%j/%m/%y %H:%M"), "%j/%m/%y %H:%M").time()
+        time = datetime.strptime(comparison.date.strftime("%j/%m/%y %H:%M"), "%j/%m/%y %H:%M").time()
         for key in data:
             print(key)
             normal_currency_qs = Currency.objects.filter(sympol=key)
             if normal_currency_qs.exists():
                 normal_currency = normal_currency_qs.first()
-                if time >= normal_currency.open_time and time <= normal_currency.close_time:
+                if True:
                     comparison_details = ComparisonDetails.objects.create(
                         normal_currency=normal_currency,
                         bye_value=float(data[key]),
                         comparison=comparison,
-                        open_price=True if time >= normal_currency.open_time and time < normal_currency.open_time.replace(
-                            hour=(normal_currency.open_time.hour+1) % 24) else False,
-                        close_price=True if time <= normal_currency.close_time and time > normal_currency.close_time.replace(
-                            hour=(normal_currency.close_time.hour-1) % 24) else False,
+                        open_price=True
+                        if time >= normal_currency.open_time
+                        and time < normal_currency.open_time.replace(hour=(normal_currency.open_time.hour + 1) % 24)
+                        else False,
+                        close_price=True
+                        if time <= normal_currency.close_time
+                        and time > normal_currency.close_time.replace(hour=(normal_currency.close_time.hour - 1) % 24)
+                        else False,
                     )
-                    day_values, created = DayValues.objects.get_or_create(
-                        date=datetime.today(), base_currency=cur)
-                    qs = DayValuesLowHigh.objects.filter(
-                        day_values=day_values, normal_currency=normal_currency).order_by('-day_values__date')
+                    day_values, created = DayValues.objects.get_or_create(date=datetime.today(), base_currency=cur)
+                    qs = DayValuesLowHigh.objects.filter(day_values=day_values, normal_currency=normal_currency).order_by("-day_values__date")
                     if qs.exists():
                         day_values_low_high = qs.first()
-                        day_values_low_high.high_value = comparison_details.bye_value if comparison_details.bye_value > day_values_low_high.high_value else day_values_low_high.high_value
-                        day_values_low_high.low_value = comparison_details.bye_value if comparison_details.bye_value < day_values_low_high.low_value else day_values_low_high.low_value
+                        day_values_low_high.high_value = (
+                            comparison_details.bye_value
+                            if comparison_details.bye_value > day_values_low_high.high_value
+                            else day_values_low_high.high_value
+                        )
+                        day_values_low_high.low_value = (
+                            comparison_details.bye_value
+                            if comparison_details.bye_value < day_values_low_high.low_value
+                            else day_values_low_high.low_value
+                        )
                         day_values_low_high.save()
                     else:
                         DayValuesLowHigh.objects.create(
                             day_values=day_values,
                             normal_currency=normal_currency,
                             low_value=comparison_details.bye_value,
-                            high_value=comparison_details.bye_value
+                            high_value=comparison_details.bye_value,
                         )
                     lqs = ComparisonDetails.objects.filter(
                         comparison__base_currency=cur,
-                        comparison__date__date=datetime.today()-timedelta(days=1),
+                        comparison__date__date=datetime.today() - timedelta(days=0),
                         normal_currency=normal_currency,
-                        close_price=True
+                        close_price=True,
                     )
                     excute = False
                     if normal_currency in ar_curs:
                         if comparison_details.open_price or comparison_details.close_price:
                             excute = True
                     elif normal_currency in other_curs:
-                        if comparison_details.oprn_price or comparison_details.close_price:
+                        if comparison_details.open_price or comparison_details.close_price:
                             excute = True
                         elif datetime.now().time() > Time(16.15) and datetime.now().time() < Time(17.15):
                             excute = True
@@ -107,20 +111,18 @@ def new_exchange():
                             assets = fall_assets
                         else:
                             assets = stability_assets
-                        cur_name_ar = 'ال '+cur.ar_name.split(' ')[0]+'ال '+cur.ar_name.split(' ')[1] if len(cur.ar_name.split(' ')) == 2 else cur_name_ar
-                        country_name_ar = translator.translate(
-                            normal_currency.country.name, dest='ar').text
-                        date_ar = translator.translate(
-                            comparison.date.strftime("%A %-d %B, %Y"), dest='ar').text
-                        normal_cur_ar = translator.translate(
-                            normal_currency.name, dest='ar').text
-                        margin = ProfitMarginDetails.objects.filter(
-                            profit_margin__base_currency=cur,
-                            normal_currency=normal_currency
+                        cur_name_ar = (
+                            "ال " + cur.ar_name.split(" ")[0] + "ال " + cur.ar_name.split(" ")[1] if len(cur.ar_name.split(" ")) == 2 else cur_name_ar
                         )
-                        sell_value = round(comparison_details.bye_value+margin.first().value, 2) if margin.exists() else comparison_details.bye_value
+                        country_name_ar = translator.translate(normal_currency.country.name, dest="ar").text
+                        date_ar = translator.translate(comparison.date.strftime("%A %-d %B, %Y"), dest="ar").text
+                        normal_cur_ar = translator.translate(normal_currency.name, dest="ar").text
+                        margin = ProfitMarginDetails.objects.filter(profit_margin__base_currency=cur, normal_currency=normal_currency)
+                        sell_value = (
+                            round(comparison_details.bye_value + margin.first().value, 2) if margin.exists() else comparison_details.bye_value
+                        )
 
-                        if cur.currency_type == 'Metals':
+                        if cur.currency_type == "Metals":
                             header = f"سعر {cur_name_ar} في {country_name_ar} اليوم {date_ar}"
                             sub_header = f"سعر ال{cur_name_ar} في اليوم {date_ar} مقابل ال{translator.translate(normal_currency.name, dest='ar')}"
                             pqs = Paragraph.objects.filter(currency=cur)
@@ -132,14 +134,13 @@ def new_exchange():
                                 base_currency=cur,
                                 normal_currency=normal_currency,
                                 date=comparison.date,
-                                body1=body1
+                                body1=body1,
                             )
                             if pqs.exists():
                                 news.paragraphs = pqs.first()
                                 news.save()
                         else:
-                            pqs = Paragraph.objects.filter(
-                                currency=normal_currency)
+                            pqs = Paragraph.objects.filter(currency=normal_currency)
                             header = f"سعر ال{cur_name_ar} في {country_name_ar} اليوم {date_ar}"
                             sub_header = f"سعر ال{cur_name_ar} في اليوم {date_ar} مقابل ال{translator.translate(normal_currency.name, dest='ar')}"
                             body1 = f"{random.choice(assets).asset} سعر ال{cur_name_ar} اليوم في {country_name_ar} خلال تعاملات {date_ar} في مستهل التعاملات في البنوك واسواق الصرافة في {country_name_ar}"
@@ -156,8 +157,8 @@ def new_exchange():
                             if pqs.exists():
                                 news.paragraphs = pqs.first()
                                 news.save()
-                print('\n dooooone \n')
-    print('ALL DOOOOOOOOONE')
+                print("\n dooooone \n")
+    print("ALL DOOOOOOOOONE")
 
 
 def run_continuously(self, interval=1):
@@ -175,7 +176,6 @@ def run_continuously(self, interval=1):
     cease_continuous_run = threading.Event()
 
     class ScheduleThread(threading.Thread):
-
         @classmethod
         def run(cls):
             while not cease_continuous_run.is_set():
